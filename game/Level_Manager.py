@@ -45,11 +45,14 @@ class Level_Manager:
                 'image': '',
                 'sound_up': '',
                 'sound_down': '',
-                'spring_constant': 0
+                'spring_constant': 0,
+                'friction': -0.1,
+                'force_up': -0.5,
+                'max_y': (SCREEN_HEIGHT / 3) * 2,
+                'gravity': 0.5
             }
             level1_data.append(column)
             i += 1
         return level1_data
-
 
 

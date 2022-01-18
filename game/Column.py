@@ -1,28 +1,56 @@
 import pygame as pg
-# Test
+
+
+vec = pg.math.Vector2
 
 class Column(pg.sprite.Sprite):
     def __init__(self, column_data):
         super().__init__()
+
+        # Level data
         self.number = column_data['number']
-        self.width = column_data['width']
-        self.height = column_data['height']
-        self.pos_x = column_data['pos_x']
-        self.pos_y = column_data['pos_y']
-        self.mass = column_data['mass']
-        # self.image = pg.image.load(column_data['image']).convert_alpha()
-        # self.sound_up = column_data['sound_up']
-        # self.sound_down = column_data['sound_down']
-        self.spring_constant = column_data['spring_constant']
+        # self.image = pg.image.load(column_data['image']).convert_alpha() # TODO
+        # self.sound_up = column_data['sound_up'] # TODO
+        # self.sound_down = column_data['sound_down'] # TODO
 
+        # Column Constants
+        self.MAX_Y = column_data['max_y']
+        self.WIDTH = column_data['width']
+        self.HEIGHT = column_data['height']
+        self.MASS = column_data['mass']
+        self.SPRING_CONSTANT = column_data['spring_constant']
+        self.FRICTION = column_data['friction']
+        self.FORCE_UP = column_data['force_up']
+        self.GRAVITY = column_data['gravity']
 
-        self.rect = pg.Rect(self.pos_x, self.pos_y, self.width, self.height)
+        # Column hitbox: eventually needs to be different shapes # TODO
+        self.rect = pg.Rect(self.pos_x, self.pos_y, self.WIDTH, self.HEIGHT)
+
+        # Column movement
+        self.pos = vec(column_data['pos_x'], column_data['pos_y'])
+        self.acc = vec(0, self.GRAVITY)
+        self.vel = vec(0, 0)
+
+        # Column States
+        self.moving_up = False
+        self.moving_down = False
+
+    def accelerate(self):
+        """ Gets called from the Game's event loop if we are pressing the control for this column """
+        # Use force up to calc the net acceleration between the column and gravity
+        # Set the acceleration to that
 
     def move(self):
-        pass
+        # Implement movemenet based on acceleration, velocity, and friction here #TODO
+
+
+
+        if self.rect.top >= self.MAX_Y:
+            self.pos.y = self.MAX_Y
 
     def update(self):
-        pass
+        self.move()
+        # self.collisions()
 
     def draw(self, screen, show_hitboxes=True):
         # screen.blit(self.image, (self.pos_x, self.pos_y))
