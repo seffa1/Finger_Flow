@@ -40,16 +40,16 @@ class Level_Manager:
                 'width': SCREEN_WIDTH / 10,
                 'height': SCREEN_HEIGHT,
                 'pos_x': (SCREEN_WIDTH / 10) * i,
-                'pos_y': (SCREEN_HEIGHT / 3) * 2,
-                'mass': 10,
+                'pos_y': (SCREEN_HEIGHT / 3) * 1,
+                'mass': 100,
                 'image': '',
                 'sound_up': '',
                 'sound_down': '',
                 'spring_constant': 0,
                 'friction': -0.1,
-                'force_up': -0.5,
+                'force_up': -1000,
                 'max_y': (SCREEN_HEIGHT / 3) * 2,
-                'gravity': 0.5
+                'gravity': 9.81
             }
             level1_data.append(column)
             i += 1

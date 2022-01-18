@@ -23,13 +23,13 @@ class Column(pg.sprite.Sprite):
         self.FORCE_UP = column_data['force_up']
         self.GRAVITY = column_data['gravity']
 
-        # Column hitbox: eventually needs to be different shapes # TODO
-        self.rect = pg.Rect(self.pos_x, self.pos_y, self.WIDTH, self.HEIGHT)
-
         # Column movement
         self.pos = vec(column_data['pos_x'], column_data['pos_y'])
         self.acc = vec(0, self.GRAVITY)
         self.vel = vec(0, 0)
+
+        # Column hitbox: eventually needs to be different shapes # TODO
+        self.rect = pg.Rect(self.pos.x, self.pos.y, self.WIDTH, self.HEIGHT)
 
         # Column States
         self.moving_up = False
@@ -39,14 +39,17 @@ class Column(pg.sprite.Sprite):
         """ Gets called from the Game's event loop if we are pressing the control for this column """
         # Use force up to calc the net acceleration between the column and gravity
         # Set the acceleration to that
+        acceleration = self.FORCE_UP / self.MASS
+        self.acc.y += acceleration
 
     def move(self):
-        # Implement movemenet based on acceleration, velocity, and friction here #TODO
-
-
+        # Implement movement based on acceleration, velocity, and friction here #TODO
+        self.vel.y += self.acc.y
+        self.pos.y += self.vel.y
+        self.rect.topleft = self.pos
 
         if self.rect.top >= self.MAX_Y:
-            self.pos.y = self.MAX_Y
+            self.rect.top = self.MAX_Y
 
     def update(self):
         self.move()
