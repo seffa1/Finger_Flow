@@ -47,9 +47,10 @@ class Level_Manager:
                 'sound_down': '',
                 'spring_constant': 0,
                 'friction': -0.1,
-                'force_up': -1000,
+                'force_up': -101,
                 'max_y': (SCREEN_HEIGHT / 3) * 2,
-                'gravity': 9.81
+                'gravity': 1.1,
+                'min_y': SCREEN_HEIGHT / 4
             }
             level1_data.append(column)
             i += 1

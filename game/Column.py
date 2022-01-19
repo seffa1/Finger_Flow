@@ -15,6 +15,7 @@ class Column(pg.sprite.Sprite):
 
         # Column Constants
         self.MAX_Y = column_data['max_y']
+        self.MIN_Y = column_data['min_y']
         self.WIDTH = column_data['width']
         self.HEIGHT = column_data['height']
         self.MASS = column_data['mass']
@@ -32,24 +33,50 @@ class Column(pg.sprite.Sprite):
         self.rect = pg.Rect(self.pos.x, self.pos.y, self.WIDTH, self.HEIGHT)
 
         # Column States
-        self.moving_up = False
-        self.moving_down = False
+        self.at_top = False
+        self.at_bottom = False
 
     def accelerate(self):
         """ Gets called from the Game's event loop if we are pressing the control for this column """
         # Use force up to calc the net acceleration between the column and gravity
         # Set the acceleration to that
-        acceleration = self.FORCE_UP / self.MASS
-        self.acc.y += acceleration
+        # FORCE_UP = -int,     MASS = +ing,      acceleration = -int,     Gravity = +int
+        # acceleration_up = self.FORCE_UP / self.MASS
+        # self.acc.y += acceleration_up
+        if not self.at_top:
+            self.acc.y = -1.2
+
+    def deccelerate(self):
+        if self.at_top:
+            self.vel.y = .1
+        self.acc = vec(0, self.GRAVITY)
 
     def move(self):
         # Implement movement based on acceleration, velocity, and friction here #TODO
         self.vel.y += self.acc.y
         self.pos.y += self.vel.y
-        self.rect.topleft = self.pos
 
-        if self.rect.top >= self.MAX_Y:
-            self.rect.top = self.MAX_Y
+        # Controls the columns when at bottom
+        # At bottom
+        if self.pos.y >= self.MAX_Y:
+            self.pos.y = self.MAX_Y
+            self.at_bottom = True
+            self.vel.y = 0
+        else:
+            self.at_bottom = False
+
+        # Controls the columns when at top
+        # At top
+        if self.pos.y <= self.MIN_Y:
+            self.pos.y = self.MIN_Y
+            self.vel.y = 0
+            self.at_top = True
+        else:
+            # print('should not be at top')
+            self.at_top = False
+
+
+        self.rect.topleft = self.pos
 
     def update(self):
         self.move()

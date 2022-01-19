@@ -6,7 +6,7 @@ class Level:
     def __init__(self, level_data, screen):
         self.screen = screen
         self.level_data = level_data
-        # Dictionary of column objects
+        # Dictionary of column objects. {1: column1, 2: column2}
         self.columns = {}
         self.column_group = pg.sprite.Group()
         self._create_columns(self.level_data)
@@ -19,6 +19,9 @@ class Level:
             self.columns[column.number] = column
             self.column_group.add(column)
 
+    def get_column(self, n: int):
+        return self.columns[n]
+
     def add_background(self, image):
         # TODO
         pass
@@ -26,6 +29,7 @@ class Level:
     def update_columns(self):
         for column in self.columns.values():
             column.update()
+
 
     def draw_columns(self):
         for column in self.columns.values():
