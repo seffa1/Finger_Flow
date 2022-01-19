@@ -40,7 +40,14 @@ class Level:
         for column in self.columns.values():
             column.update()
 
-
     def draw_columns(self):
         for column in self.columns.values():
             column.draw(self.screen)
+
+    def update_balls(self):
+        for ball in self.balls:
+            ball.update()
+
+    def draw_balls(self):
+        for ball in self.balls:
+            ball.draw(self.screen)

@@ -1,5 +1,5 @@
 import pygame as pg
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GRAVITIES
 from .Level import Level
 
 # The level manager stores data for each level, loads and swithces beteween levels
@@ -49,7 +49,7 @@ class Level_Manager:
                 'friction': -0.1,
                 'force_up': -101,
                 'max_y': (SCREEN_HEIGHT / 3) * 2,
-                'gravity': 1.1,
+                'gravity': GRAVITIES[1],
                 'min_y': SCREEN_HEIGHT / 4
             }
             level1_column_data.append(column)
@@ -62,9 +62,11 @@ class Level_Manager:
             'mass': 10,
             'friction': -.1,
             'pos_x': 10,
-            'pos_y': SCREEN_HEIGHT / 2,
+            'pos_y': 10,
             'vel_x': .1,
-            'vel_y': 0
+            'vel_y': 0,
+            'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
+            'gravity': GRAVITIES[1]
         }
 
         balls = {1: ball_1_data}

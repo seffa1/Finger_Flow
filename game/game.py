@@ -81,7 +81,7 @@ class Game:
         self.level_manager.get_level().update_columns()
 
         # Update the ball
-        # Ball.update() #TODO
+        self.level_manager.get_level().update_balls()
 
         # Update the UI
         self.user_interface.update(self.clock.get_fps())
@@ -92,6 +92,9 @@ class Game:
 
         # Draw the columns
         self.level_manager.get_level().draw_columns()
+
+        # Draw the balls
+        self.level_manager.get_level().draw_balls()
 
         # Draw the interface
         self.user_interface.draw(self.screen)
