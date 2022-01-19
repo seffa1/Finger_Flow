@@ -11,7 +11,7 @@ class Level_Manager:
 
 
         # Level 1
-        L1 = Level(self.generate_level_1_data(), screen)
+        L1 = Level(self.generate_level_1_column_data(), screen, self.level_1_ball_data())
         self.levels.append(L1)
         # L1.add_background #TODO
         # L1.add_obsticle_spikes #TODO
@@ -30,9 +30,9 @@ class Level_Manager:
 
 
     # Maybe all this data eventually gets moved to a JSON file #TODO
-    def generate_level_1_data(self):
+    def generate_level_1_column_data(self):
         # Level 1 Data: [{column1_data}, {column2_data}, {...}, {...}... {column10_data}]
-        level1_data = []
+        level1_column_data = []
         i = 0
         for column in range(1, 11):
             column = {
@@ -52,8 +52,22 @@ class Level_Manager:
                 'gravity': 1.1,
                 'min_y': SCREEN_HEIGHT / 4
             }
-            level1_data.append(column)
+            level1_column_data.append(column)
             i += 1
-        return level1_data
+        return level1_column_data
+
+    def level_1_ball_data(self):
+        ball_1_data = {
+            'diameter': 20,
+            'mass': 10,
+            'friction': -.1,
+            'pos_x': 10,
+            'pos_y': SCREEN_HEIGHT / 2,
+            'vel_x': .1,
+            'vel_y': 0
+        }
+
+        balls = {1: ball_1_data}
+        return balls
 
 
