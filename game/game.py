@@ -4,6 +4,7 @@ from .Level_Manager import Level_Manager
 from .UserInterface import UserInterface
 
 
+
 class Game:
     def __init__(self, screen, clock):
         self.screen = screen
@@ -14,8 +15,8 @@ class Game:
 
     def run(self):
         self.playing = True
-        # load level 1
 
+        # Game loop
         while self.playing:
             self.clock.tick(60)
             self.events()
@@ -74,16 +75,18 @@ class Game:
                 if event.key == pg.K_p:
                     self.level_manager.get_level().get_column(10).deccelerate()
 
-
     def update(self):
-        # Update the columns
-        self.level_manager.get_level().update_columns()
-
         # Update the ball
         self.level_manager.get_level().update_balls()
 
+        # Update the columns
+        self.level_manager.get_level().update_columns()
+
         # Update the UI
-        self.user_interface.update(self.clock.get_fps(), self.level_manager.get_level().balls)
+        self.user_interface.update(self.clock.get_fps(),
+                                   self.level_manager.get_level().balls,
+                                   self.level_manager.get_level().columns
+                                   )
 
     def draw(self):
         # Draw the background, if you dont do this each frame the images you draw

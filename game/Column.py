@@ -48,7 +48,7 @@ class Column(pg.sprite.Sprite):
 
     def deccelerate(self):
         if self.at_top:
-            self.vel.y = .1
+            self.vel.y = 0
         self.acc = vec(0, self.GRAVITY)
 
     def move(self):

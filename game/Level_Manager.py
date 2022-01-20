@@ -46,7 +46,7 @@ class Level_Manager:
                 'sound_up': '',
                 'sound_down': '',
                 'spring_constant': 0,
-                'friction': -0.1,
+                'friction': .8,
                 'force_up': -101,
                 'max_y': (SCREEN_HEIGHT / 3) * 2,
                 'gravity': GRAVITIES[1],
@@ -60,7 +60,7 @@ class Level_Manager:
         ball_1_data = {
             'diameter': 20,
             'mass': 1,
-            'friction': -.1,
+            'friction': 0.5,
             'pos_x': 15,
             'pos_y': 2,
             'vel_x': 0,

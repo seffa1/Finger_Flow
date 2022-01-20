@@ -36,10 +36,10 @@ class Ball(pg.sprite.Sprite):
         direction, and updates the y position and velocity accordingly. The rect is moved with the ball position each time."""
         # Calc the movement
         self.acc.y = self.GRAVITY
-        self.vel += self.acc
+        self.vel.y += self.acc.y
 
         # Track the collisions types
-        collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False}
+        collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False, 'moving_up': False}
 
         # Move the ball and rect in the x direction
         self.pos.x += self.vel.x
@@ -53,7 +53,8 @@ class Ball(pg.sprite.Sprite):
             if self.vel.x > 0:
                 # Set right side of ball to left side of column
                 self.pos.x = column.rect.left - self.IMAGE.get_width()
-                self.vel.x = 0
+                # Equal and opposite vel to bounce the ball
+                self.vel.x = self.vel.x * -1 * self.FRICTION
                 collision_types['right'] = True
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos
@@ -61,10 +62,13 @@ class Ball(pg.sprite.Sprite):
             elif self.vel.x < 0:
                 # Set left side of ball to right side of column
                 self.pos.x = column.rect.right
-                self.vel.x = 0
+                # Equal and opposite vel to bounce the ball
+                self.vel.x = self.vel.x * -1 * self.FRICTION
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos
                 collision_types['left'] = True
+
+
 
         # Move the ball and rect in the y direction
         self.pos.y += self.vel.y
@@ -73,19 +77,18 @@ class Ball(pg.sprite.Sprite):
         # Check for collisions
         collisions = pg.sprite.spritecollide(self, column_group, False)
         for column in collisions:
-            # If ball is falling down and collided
+            # If ball is falling down and is collided
             if self.vel.y > 0:
-                # In progress
-                # # Check if the column is moving upwards
+                # Check if the column is moving upwards
                 if column.vel.y < 0:
                     # if so, add the column's acc to the ball's velocity
                     self.vel.y = column.vel.y
                     # Set bottom of ball to top of column
-                    self.pos.y = column.rect.top - self.IMAGE.get_height()
+                    # self.pos.y = column.rect.top - self.IMAGE.get_height()
                     # Move the rect with the ball image
                     self.rect.topleft = self.pos
                 else:
-                    # If the column is not moving, set the balls y vel to 0.
+                    # If the column is not moving upwards, set the balls y vel to 0.
                     # Eventually this will be an elastic collisions to make the ball bounce
                     self.vel.y = 0
                     # Set bottom of ball to top of column
