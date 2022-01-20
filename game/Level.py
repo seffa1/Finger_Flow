@@ -46,7 +46,7 @@ class Level:
 
     def update_balls(self):
         for ball in self.balls:
-            ball.update()
+            ball.update(self.column_group)
 
     def draw_balls(self):
         for ball in self.balls:

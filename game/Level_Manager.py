@@ -61,12 +61,13 @@ class Level_Manager:
             'diameter': 20,
             'mass': 10,
             'friction': -.1,
-            'pos_x': 10,
-            'pos_y': 10,
-            'vel_x': .1,
+            'pos_x': SCREEN_WIDTH / 2,
+            'pos_y': 2,
+            'vel_x': 0,
             'vel_y': 0,
             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
-            'gravity': GRAVITIES[1]
+            'gravity': GRAVITIES[1],
+            'image_scale': (100, 100)
         }
 
         balls = {1: ball_1_data}
