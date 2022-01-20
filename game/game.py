@@ -83,7 +83,7 @@ class Game:
         self.level_manager.get_level().update_balls()
 
         # Update the UI
-        self.user_interface.update(self.clock.get_fps())
+        self.user_interface.update(self.clock.get_fps(), self.level_manager.get_level().balls)
 
     def draw(self):
         # Draw the background, if you dont do this each frame the images you draw

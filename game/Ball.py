@@ -35,7 +35,7 @@ class Ball(pg.sprite.Sprite):
         and updates the x-velocity and position. Then it moves the ball in the y-direction, checks for collisions in the y
         direction, and updates the y position and velocity accordingly. The rect is moved with the ball position each time."""
         # Calc the movement
-        self.acc = vec(0, self.GRAVITY)
+        self.acc.y = self.GRAVITY
         self.vel += self.acc
 
         # Track the collisions types
@@ -77,6 +77,16 @@ class Ball(pg.sprite.Sprite):
             if self.vel.y > 0:
                 # Set bottom of ball to top of column
                 self.pos.y = column.rect.top - self.IMAGE.get_height()
+
+                # In progress
+                # # Check if the column is moving upwards
+                # if column.vel.y < 0:
+                #     # if so, add the column's acc to the ball's velocity
+                #     self.vel.y += column.acc.y
+
+
+                # If the column is not moving, set the balls y vel to 0.
+                # Eventually this will be an elastic collisions to make the ball bounce
                 self.vel.y = 0
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos

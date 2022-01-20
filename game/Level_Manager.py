@@ -59,11 +59,11 @@ class Level_Manager:
     def level_1_ball_data(self):
         ball_1_data = {
             'diameter': 20,
-            'mass': 10,
+            'mass': 1,
             'friction': -.1,
-            'pos_x': SCREEN_WIDTH / 2 + 60,
+            'pos_x': 15,
             'pos_y': 2,
-            'vel_x': 0,
+            'vel_x': 5,
             'vel_y': 0,
             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
             'gravity': GRAVITIES[1],
