@@ -34,8 +34,7 @@ class Ball(pg.sprite.Sprite):
         """ Move calculates the intended velocity of the ball and moves the ball in the x-direction, checks for collisions
         and updates the x-velocity and position. Then it moves the ball in the y-direction, checks for collisions in the y
         direction, and updates the y position and velocity accordingly. The rect is moved with the ball position each time."""
-        # Calc the movement
-        self.acc.y = self.GRAVITY
+
         self.vel.y += self.acc.y
 
         # Track the collisions types
