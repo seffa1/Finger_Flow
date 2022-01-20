@@ -6,12 +6,18 @@ class Ball(pg.sprite.Sprite):
     def __init__(self, ball_data):
         super().__init__()
 
+        # Info for rotational physics
+        # https://www.khanacademy.org/science/physics/torque-angular-momentum/torque-tutorial/v/rotational-kinetic-energy
+
         # Ball constants
         self.IMAGE = ball_data['image']
         self.DIAMETER = ball_data['diameter']
         self.MASS = ball_data['mass']
         self.FRICTION = ball_data['friction']
         self.GRAVITY = ball_data['gravity']
+
+        # Moment of intertia for a sphere
+        self.MOMENT_OF_INERTIA = (2/5) * self.MASS * ((self.DIAMETER/2) ** 2)
 
         # Ball info
         self.pos = vec(ball_data['pos_x'], ball_data['pos_y'])
@@ -43,5 +49,6 @@ class Ball(pg.sprite.Sprite):
             pg.draw.rect(screen, (0, 255, 0), self.rect)
 
         screen.blit(self.IMAGE, (self.pos.x, self.pos.y))
+
 
 
