@@ -31,39 +31,55 @@ class Ball(pg.sprite.Sprite):
     # def apply_force(self, magnitude, )
 
     def move(self, column_group):
-        # Returns a list of columns the ball is colliding with
-        collisions = pg.sprite.spritecollide(self, column_group, False)
-
+        # Calc the movement
         self.acc = vec(0, self.GRAVITY)
         self.vel += self.acc
+
+        # Track the collisions types
+        collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False}
 
         # Move the ball in the x direction
         self.pos.x += self.vel.x
 
         # Check for collisions in x direction
+        # Returns a list of columns the ball is colliding with
+        collisions = pg.sprite.spritecollide(self, column_group, False)
         for column in collisions:
-
-            # If a column collides and is to the left
-            if column.pos.x <= self.pos.x:
-
-                # Set the balls left to equal the column's right
-                self.pos.x = column.pos.x + column.WIDTH
+            # If ball is moving right and collided
+            if self.vel.x > 0:
+                # Set right side of ball to left side of column
+                self.pos.x = column.rect.left - self.IMAGE.get_width()
+                self.vel.x = 0
+                collision_types['right'] = True
+            # If ball is moving left and collided
+            elif self.vel.x < 0:
+                # Set left side of ball to right side of column
+                self.pos.x = column.rect.right
+                self.vel.x = 0
+                collision_types['left']= True
 
         # Move the ball in the y direction
         self.pos.y += self.vel.y
 
         # Check for collisions
+        collisions = pg.sprite.spritecollide(self, column_group, False)
         for column in collisions:
-
-            # If the column collides and is below the ball
-            if column.pos.y >= self.pos.y:
-
-                # Set the balls bottom to equal the columns top
-                self.pos.y = column.pos.y
-
+            # If ball is falling down and collided
+            if self.vel.y > 0:
+                # Set bottom of ball to top of column
+                self.pos.y = column.rect.top - self.IMAGE.get_height()
+                self.vel.y = 0
+                collision_types['bottom'] = True
+            # If ball is moving up and collided
+            elif self.vel.y < 0:
+                # Set top of ball to bottom of column
+                self.pos.y = column.rect.bottom
+                self.vel.y = 0
+                collision_types['top'] = True
 
         # Move the rect with the image
         self.rect.topleft = self.pos
+        print(self.pos.y)
 
     def update(self, column_group):
         self.move(column_group)

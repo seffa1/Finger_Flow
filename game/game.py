@@ -12,7 +12,6 @@ class Game:
         self.level_manager = Level_Manager(screen)
         self.user_interface = UserInterface()
 
-
     def run(self):
         self.playing = True
         # load level 1
@@ -87,7 +86,8 @@ class Game:
         self.user_interface.update(self.clock.get_fps())
 
     def draw(self):
-        # Draw the background
+        # Draw the background, if you dont do this each frame the images you draw
+        # to the screen will stack up as copies over one anotheer
         self.screen.fill((0, 0, 0))
 
         # Draw the columns
@@ -99,4 +99,6 @@ class Game:
         # Draw the interface
         self.user_interface.draw(self.screen)
 
+        # Updates the entire display at once
+        # This is no different than display.update() with no arguments passed in
         pg.display.flip()
