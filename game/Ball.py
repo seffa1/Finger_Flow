@@ -75,30 +75,34 @@ class Ball(pg.sprite.Sprite):
         for column in collisions:
             # If ball is falling down and collided
             if self.vel.y > 0:
-                # Set bottom of ball to top of column
-                self.pos.y = column.rect.top - self.IMAGE.get_height()
-
                 # In progress
                 # # Check if the column is moving upwards
-                # if column.vel.y < 0:
-                #     # if so, add the column's acc to the ball's velocity
-                #     self.vel.y += column.acc.y
+                if column.vel.y < 0:
+                    # if so, add the column's acc to the ball's velocity
+                    self.vel.y = column.vel.y
+                    # Set bottom of ball to top of column
+                    self.pos.y = column.rect.top - self.IMAGE.get_height()
+                    # Move the rect with the ball image
+                    self.rect.topleft = self.pos
+                else:
+                    # If the column is not moving, set the balls y vel to 0.
+                    # Eventually this will be an elastic collisions to make the ball bounce
+                    self.vel.y = 0
+                    # Set bottom of ball to top of column
+                    self.pos.y = column.rect.top - self.IMAGE.get_height()
+                    # Move the rect with the ball image
+                    self.rect.topleft = self.pos
 
 
-                # If the column is not moving, set the balls y vel to 0.
-                # Eventually this will be an elastic collisions to make the ball bounce
-                self.vel.y = 0
+
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos
                 collision_types['bottom'] = True
-            # If ball is moving up and collided
-            elif self.vel.y < 0:
-                # Set top of ball to bottom of column
-                self.pos.y = column.rect.bottom
-                self.vel.y = 0
-                # Move the rect with the ball image
-                self.rect.topleft = self.pos
-                collision_types['top'] = True
+
+
+            # # If ball is moving up and collided
+            # We don't check if the ball collided with the column above because
+            # It will never happen
 
         # Move the rect with the image
         self.rect.topleft = self.pos
