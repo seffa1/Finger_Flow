@@ -31,9 +31,9 @@ class Ball(pg.sprite.Sprite):
     # def apply_force(self, magnitude, )
 
     def move(self, column_group):
-        """ Move calculates the intended acceleration of the ball. Move the ball in the x-direction, checks for collisions
-        and updated the x-velocity and position. Then moves the ball in the y-direction, checks for collisions in the y
-        direction, and updated the y position and velocity accordingly. The rect is moved with the ball position."""
+        """ Move calculates the intended velocity of the ball and moves the ball in the x-direction, checks for collisions
+        and updates the x-velocity and position. Then it moves the ball in the y-direction, checks for collisions in the y
+        direction, and updates the y position and velocity accordingly. The rect is moved with the ball position each time."""
         # Calc the movement
         self.acc = vec(0, self.GRAVITY)
         self.vel += self.acc
@@ -92,7 +92,7 @@ class Ball(pg.sprite.Sprite):
 
         # Move the rect with the image
         self.rect.topleft = self.pos
-        print(self.pos.y)
+
 
     def update(self, column_group):
         self.move(column_group)
