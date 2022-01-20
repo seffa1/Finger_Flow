@@ -18,6 +18,7 @@ class UserInterface:
         self.FPS_text = self.regularfont.render("0", True, self.WHITE)
         self.ball_vel = self.regularfont.render("0", True, self.WHITE)
         self.col1_vel = self.regularfont.render("0", True, self.WHITE)
+        self.ball_collisions = self.regularfont.render("0", True, self.WHITE)
 
     def update(self, fps, balls, columns):
         # FPS
@@ -29,6 +30,10 @@ class UserInterface:
         ball_vel_str = f'Ball_y_vel: {str(round(ball.vel.y, 2))}'
         self.ball_vel = self.regularfont.render(ball_vel_str, True, self.WHITE)
 
+        # Ball Collisions
+        ball_collisions = f'Collisions: {str(ball.collision_types)}'
+        self.ball_collisions = self.regularfont.render(ball_collisions, True, self.WHITE)
+
         # Column 1 vel
         column_1 = columns[1]
         col_vel_str = f'Col1_vel.y: {str(round(column_1.vel.y, 2))}'
@@ -39,3 +44,4 @@ class UserInterface:
             screen.blit(self.FPS_text, (SCREEN_WIDTH - 170, 10))
             screen.blit(self.ball_vel, (SCREEN_WIDTH - 170, 40))
             screen.blit(self.col1_vel, (SCREEN_WIDTH - 170, 70))
+            screen.blit(self.ball_collisions, (10, 10))

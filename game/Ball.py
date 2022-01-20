@@ -23,6 +23,7 @@ class Ball(pg.sprite.Sprite):
         self.pos = vec(ball_data['pos_x'], ball_data['pos_y'])
         self.vel = vec(ball_data['vel_x'], ball_data['vel_y'])
         self.acc = vec(0, self.GRAVITY)
+        self.collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False, 'moving_up': False}
 
         # Rect
         self.rect = self.IMAGE.get_rect()
@@ -38,7 +39,7 @@ class Ball(pg.sprite.Sprite):
         self.vel.y += self.acc.y
 
         # Track the collisions types
-        collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False, 'moving_up': False}
+        self.collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False, 'moving_up': False}
 
         # Move the ball and rect in the x direction
         self.pos.x += self.vel.x
@@ -54,7 +55,7 @@ class Ball(pg.sprite.Sprite):
                 self.pos.x = column.rect.left - self.IMAGE.get_width()
                 # Equal and opposite vel to bounce the ball
                 self.vel.x = self.vel.x * -1 * self.FRICTION
-                collision_types['right'] = True
+                self.collision_types['right'] = True
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos
             # If ball is moving left and collided
@@ -65,7 +66,7 @@ class Ball(pg.sprite.Sprite):
                 self.vel.x = self.vel.x * -1 * self.FRICTION
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos
-                collision_types['left'] = True
+                self.collision_types['left'] = True
 
 
 
@@ -91,7 +92,7 @@ class Ball(pg.sprite.Sprite):
                     # Eventually this will be an elastic collisions to make the ball bounce
                     self.vel.y = 0
                     # Set bottom of ball to top of column
-                    self.pos.y = column.rect.top - self.IMAGE.get_height()
+                    self.pos.y = column.rect.top - self.IMAGE.get_height() + 1
                     # Move the rect with the ball image
                     self.rect.topleft = self.pos
 
@@ -99,7 +100,7 @@ class Ball(pg.sprite.Sprite):
 
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos
-                collision_types['bottom'] = True
+                self.collision_types['bottom'] = True
 
 
             # # If ball is moving up and collided

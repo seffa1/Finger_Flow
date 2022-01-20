@@ -63,7 +63,7 @@ class Level_Manager:
             'friction': 0.5,
             'pos_x': 15,
             'pos_y': 2,
-            'vel_x': 2,
+            'vel_x': 0,
             'vel_y': 0,
             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
             'gravity': GRAVITIES[1],
