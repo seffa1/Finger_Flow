@@ -48,7 +48,7 @@ class Level_Manager:
                 'spring_constant': 0,
                 'friction': .8,
                 'force_up': -90,
-                'max_y': (SCREEN_HEIGHT / 3) * 3 - 50,
+                'max_y': (SCREEN_HEIGHT / 3) * 3 - 300,
                 'gravity': GRAVITIES[1],
                 'min_y': 500
             }
@@ -61,7 +61,7 @@ class Level_Manager:
             'diameter': 20,
             'mass': 2,
             'friction': 0.5,
-            'pos_x': 15,
+            'pos_x': 590,
             'pos_y': 2,
             'vel_x': 0,
             'vel_y': 0,
