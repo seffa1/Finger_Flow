@@ -50,7 +50,7 @@ class Level_Manager:
                 'force_up': -90,
                 'max_y': (SCREEN_HEIGHT / 3) * 3 - 50,
                 'gravity': GRAVITIES[1],
-                'min_y': SCREEN_HEIGHT / 2
+                'min_y': 500
             }
             level1_column_data.append(column)
             i += 1

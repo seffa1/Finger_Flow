@@ -24,6 +24,7 @@ class Ball(pg.sprite.Sprite):
         self.vel = vec(ball_data['vel_x'], ball_data['vel_y'])
         self.acc = vec(0, self.GRAVITY)
         self.collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False, 'moving_up': False}
+        self.collisions = None
 
         # Rect
         self.rect = self.IMAGE.get_rect()
@@ -47,8 +48,8 @@ class Ball(pg.sprite.Sprite):
 
         # Check for collisions in x direction
         # Returns a list of columns the ball is colliding with
-        collisions = pg.sprite.spritecollide(self, column_group, False)
-        for column in collisions:
+        self.collisions = pg.sprite.spritecollide(self, column_group, False)
+        for column in self.collisions:
             # If ball is moving right and collided
             if self.vel.x > 0:
                 # Set right side of ball to left side of column
@@ -75,14 +76,8 @@ class Ball(pg.sprite.Sprite):
         self.rect.topleft = self.pos
 
         # Check for collisions
-        collisions = pg.sprite.spritecollide(self, column_group, False)
-        for column in collisions:
-            # # If the ball is not moving
-            # if self.vel.y == 0:
-            #     # And the column starts moving up
-            #     if column.vel.y < 0:
-
-
+        self.collisions = pg.sprite.spritecollide(self, column_group, False)
+        for column in self.collisions:
             # If ball is falling down or not moving and is collided
             if self.vel.y >= 0:
                 # Check if the column is moving upwards
@@ -98,10 +93,9 @@ class Ball(pg.sprite.Sprite):
                     # Eventually this will be an elastic collisions to make the ball bounce
                     self.vel.y = 0
                     # Set bottom of ball to top of column
-                    self.pos.y = column.rect.top - self.IMAGE.get_height() + 1
+                    self.pos.y = column.rect.top - self.IMAGE.get_height()
                     # Move the rect with the ball image
                     self.rect.topleft = self.pos
-
 
 
             # The ball is moving upward with the column colliding beneath it
@@ -111,7 +105,7 @@ class Ball(pg.sprite.Sprite):
                     # Then the balls vel.y equals the column
                     self.vel.y = column.vel.y
                     # Set bottom of ball to top of column
-                    self.pos.y = column.rect.top - self.IMAGE.get_height() +1
+                    self.pos.y = column.rect.top - self.IMAGE.get_height()
                     # Move the rect with the ball image
                     self.rect.topleft = self.pos
 
@@ -122,6 +116,14 @@ class Ball(pg.sprite.Sprite):
             # We don't check if the ball collided with the column above because
             # It will never happen
 
+        # Troubleshooting
+        # for column in column_group:
+        #     if self.rect.bottom > column.rect.top:
+        #         self.pos.y = column.rect.top - self.IMAGE.get_height()
+        #         self.rect.topleft = self.pos
+
+
+
         # Move the rect with the image
         self.rect.topleft = self.pos
 
@@ -130,7 +132,7 @@ class Ball(pg.sprite.Sprite):
         self.move(column_group)
 
 
-    def draw(self, screen, show_hitboxes=True):
+    def draw(self, screen, show_hitboxes=False):
         if show_hitboxes:
             pg.draw.rect(screen, (0, 255, 0), self.rect)
 

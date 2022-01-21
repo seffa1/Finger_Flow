@@ -76,11 +76,11 @@ class Game:
                     self.level_manager.get_level().get_column(10).deccelerate()
 
     def update(self):
-        # Update the ball
-        self.level_manager.get_level().update_balls()
-
         # Update the columns
         self.level_manager.get_level().update_columns()
+
+        # Update the ball
+        self.level_manager.get_level().update_balls()
 
         # Update the UI
         self.user_interface.update(self.clock.get_fps(),
