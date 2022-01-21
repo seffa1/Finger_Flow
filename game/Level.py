@@ -5,7 +5,7 @@ from .Projectile import Projectile
 
 
 class Level:
-    def __init__(self, level_data, screen, ball_data):
+    def __init__(self, level_data, screen, ball_data, projectile_data):
         self.screen = screen
         self.level_data = level_data
         # Dictionary of column objects. {1: column1, 2: column2}
@@ -16,6 +16,11 @@ class Level:
         # Generate the ball for the level
         self.balls = []
         self._create_ball(ball_data)
+
+        # Storage for the projectiles
+        self.projectiles = {}
+        self.projectile_group = pg.sprite.Group()
+        self._create_projectiles(projectile_data)
 
 
     def _create_columns(self, level_data):
@@ -31,8 +36,10 @@ class Level:
         self.balls.append(ball1)
 
     def _create_projectiles(self, projectile_data):
-        for projectile in projectile_data:
-            projectile
+        for projectile_info in projectile_data:
+            projectile = Projectile(projectile_info)
+            self.projectiles[projectile.number] = projectile
+            self.projectile_group.add(projectile)
 
     def get_column(self, n: int):
         return self.columns[n]
@@ -56,3 +63,11 @@ class Level:
     def draw_balls(self):
         for ball in self.balls:
             ball.draw(self.screen)
+
+    def update_projectile(self):
+        for projectile in self.projectiles.values():
+            projectile.update()
+
+    def draw_projectiles(self):
+        for projectile in self.projectiles.values():
+            projectile.draw(self.screen)

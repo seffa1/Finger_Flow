@@ -79,6 +79,9 @@ class Game:
         # Update the columns
         self.level_manager.get_level().update_columns()
 
+        # Update the projectiles
+        self.level_manager.get_level().update_projectile()
+
         # Update the ball
         self.level_manager.get_level().update_balls()
 
@@ -98,6 +101,9 @@ class Game:
 
         # Draw the balls
         self.level_manager.get_level().draw_balls()
+
+        # Draw the projectiles
+        self.level_manager.get_level().draw_projectiles()
 
         # Draw the interface
         self.user_interface.draw(self.screen)

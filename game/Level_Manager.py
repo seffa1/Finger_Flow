@@ -11,7 +11,7 @@ class Level_Manager:
         self.level = 1
 
         # Level 1
-        L1 = Level(self.generate_level_1_column_data(), screen, self.level_1_ball_data())
+        L1 = Level(self.generate_level_1_column_data(), screen, self.level_1_ball_data(), self.level_1_projectile_data())
         self.levels.append(L1)
         # L1.add_background #TODO
         # L1.add_obsticle_spikes #TODO
@@ -60,7 +60,7 @@ class Level_Manager:
             'friction': 0.5,
             'pos_x': 590,
             'pos_y': 6,
-            'vel_x': 1,
+            'vel_x': 0,
             'vel_y': 0,
             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
             'gravity': GRAVITIES[2],
@@ -72,10 +72,28 @@ class Level_Manager:
 
     def level_1_projectile_data(self):
         projectile_data = [
-            {'pos_x': SCREEN_WIDTH, 'pos_y': SCREEN_HEIGHT/2, 'speed': 3, 'image': pg.image.load('assets/images/ball_D20.png').convert_alpha()},  # Projectile 1
-            {},         # Projectile 2
-            {}          # Projectile 3
+            # Projectile 1
+            {'pos_x': SCREEN_WIDTH,
+             'pos_y': SCREEN_HEIGHT/2,
+             'speed': -3,
+             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
+             'num': 1},
+
+            # Projectile 2
+            {'pos_x': -300,
+             'pos_y': SCREEN_HEIGHT/2,
+             'speed': 3,
+             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
+             'num': 2},
+
+            # Projectile 3
+            {'pos_x': SCREEN_WIDTH + 600,
+             'pos_y': SCREEN_HEIGHT/2,
+             'speed': -3,
+             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
+             'num': 3}
         ]
+        return projectile_data
 
 
 
