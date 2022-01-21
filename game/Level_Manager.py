@@ -47,10 +47,10 @@ class Level_Manager:
                 'sound_down': '',
                 'spring_constant': 0,
                 'friction': .8,
-                'force_up': -101,
-                'max_y': (SCREEN_HEIGHT / 3) * 2,
+                'force_up': -90,
+                'max_y': (SCREEN_HEIGHT / 3) * 3 - 50,
                 'gravity': GRAVITIES[1],
-                'min_y': SCREEN_HEIGHT / 4
+                'min_y': SCREEN_HEIGHT / 2
             }
             level1_column_data.append(column)
             i += 1
@@ -59,14 +59,14 @@ class Level_Manager:
     def level_1_ball_data(self):
         ball_1_data = {
             'diameter': 20,
-            'mass': 1,
+            'mass': 2,
             'friction': 0.5,
             'pos_x': 15,
             'pos_y': 2,
             'vel_x': 0,
             'vel_y': 0,
             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
-            'gravity': GRAVITIES[1],
+            'gravity': GRAVITIES[2],
             'image_scale': (100, 100)
         }
 

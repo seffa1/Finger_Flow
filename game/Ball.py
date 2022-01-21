@@ -77,8 +77,14 @@ class Ball(pg.sprite.Sprite):
         # Check for collisions
         collisions = pg.sprite.spritecollide(self, column_group, False)
         for column in collisions:
-            # If ball is falling down and is collided
-            if self.vel.y > 0:
+            # # If the ball is not moving
+            # if self.vel.y == 0:
+            #     # And the column starts moving up
+            #     if column.vel.y < 0:
+
+
+            # If ball is falling down or not moving and is collided
+            if self.vel.y >= 0:
                 # Check if the column is moving upwards
                 if column.vel.y < 0:
                     # if so, add the column's acc to the ball's velocity
@@ -98,9 +104,18 @@ class Ball(pg.sprite.Sprite):
 
 
 
-                # Move the rect with the ball image
-                self.rect.topleft = self.pos
-                self.collision_types['bottom'] = True
+            # The ball is moving upward with the column colliding beneath it
+            else:
+                # If the column is not at the min_y since its vel.y gets set to 0
+                if column.pos.y != column.MIN_Y:
+                    # Then the balls vel.y equals the column
+                    self.vel.y = column.vel.y
+                    # Set bottom of ball to top of column
+                    self.pos.y = column.rect.top - self.IMAGE.get_height() +1
+                    # Move the rect with the ball image
+                    self.rect.topleft = self.pos
+
+            self.collision_types['bottom'] = True
 
 
             # # If ball is moving up and collided

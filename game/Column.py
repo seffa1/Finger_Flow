@@ -44,7 +44,7 @@ class Column(pg.sprite.Sprite):
         # acceleration_up = self.FORCE_UP / self.MASS
         # self.acc.y += acceleration_up
         if not self.at_top:
-            self.acc.y = -1.2
+            self.acc.y = self.FORCE_UP / self.MASS
 
     def deccelerate(self):
         if self.at_top:
