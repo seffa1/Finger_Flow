@@ -56,17 +56,28 @@ class UserInterface:
         self.col1_top = self.regularfont.render(col_top_str, True, self.WHITE)
 
         # Collisions check
-        collisions__check = f'Bottom=top: {ball.rect.bottom == column_1.rect.top}'
+        collisions__check = f'Bottom_1=top: {ball.rect.bottom == column_1.rect.top}'
         self.collision_check = self.regularfont.render(collisions__check, True, self.WHITE)
 
-    def draw(self, screen, show_UI=True):
+    def draw(self, screen, show_UI=True, laptop=True):
         x1 = SCREEN_WIDTH - 200
+        x2 = 10
+        y1 = 10
+        y2 = 10
+        offset1 = 30
+        if laptop:
+            x1 = SCREEN_WIDTH - 400
+            x2 = 200
+            y1 = 100
+            y2 = 100
+
         if show_UI:
-            screen.blit(self.FPS_text, (x1, 10))
-            screen.blit(self.ball_vel, (x1, 40))
-            screen.blit(self.col1_vel, (x1, 70))
-            screen.blit(self.ball_bottom_y, (x1, 100))
-            screen.blit(self.col1_top, (x1, 130))
-            screen.blit(self.collision_check, (x1, 160))
-            screen.blit(self.ball_collisions, (10, 10))
-            screen.blit(self.column_collisions, (10, 40))
+            screen.blit(self.FPS_text, (x1, y1))
+            screen.blit(self.ball_vel, (x1, y1 + offset1))
+            screen.blit(self.col1_vel, (x1, y1 + offset1 * 2))
+            screen.blit(self.ball_bottom_y, (x1, y1 + offset1 * 3))
+            screen.blit(self.col1_top, (x1, y1 + offset1 * 4))
+            screen.blit(self.collision_check, (x1, y1 + offset1 * 5))
+
+            screen.blit(self.ball_collisions, (x2, y2))
+            screen.blit(self.column_collisions, (x2, y2 + offset1))
