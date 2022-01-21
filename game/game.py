@@ -90,7 +90,7 @@ class Game:
 
     def draw(self):
         # Draw the background, if you dont do this each frame the images you draw
-        # to the screen will stack up as copies over one anotheer
+        # to the screen will stack up as copies over one another
         self.screen.fill((0, 0, 0))
 
         # Draw the columns

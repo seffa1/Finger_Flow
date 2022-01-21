@@ -59,8 +59,8 @@ class Level_Manager:
             'mass': 2,
             'friction': 0.5,
             'pos_x': 590,
-            'pos_y': 2,
-            'vel_x': 0,
+            'pos_y': 6,
+            'vel_x': 1,
             'vel_y': 0,
             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
             'gravity': GRAVITIES[2],
@@ -69,3 +69,13 @@ class Level_Manager:
 
         balls = {1: ball_1_data}
         return balls
+
+    def level_1_projectile_data(self):
+        projectile_data = [
+            {'pos_x': SCREEN_WIDTH, 'pos_y': SCREEN_HEIGHT/2, 'speed': 3, 'image': pg.image.load('assets/images/ball_D20.png').convert_alpha()},  # Projectile 1
+            {},         # Projectile 2
+            {}          # Projectile 3
+        ]
+
+
+

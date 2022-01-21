@@ -55,7 +55,8 @@ class Ball(pg.sprite.Sprite):
                 # Set right side of ball to left side of column
                 self.pos.x = column.rect.left - self.IMAGE.get_width()
                 # Equal and opposite vel to bounce the ball
-                self.vel.x = self.vel.x * -1 * self.FRICTION
+                # self.vel.x = self.vel.x * -1 * self.FRICTION
+                self.vel.x = 0
                 self.collision_types['right'] = True
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos
@@ -64,7 +65,8 @@ class Ball(pg.sprite.Sprite):
                 # Set left side of ball to right side of column
                 self.pos.x = column.rect.right
                 # Equal and opposite vel to bounce the ball
-                self.vel.x = self.vel.x * -1 * self.FRICTION
+                # self.vel.x = self.vel.x * -1 * self.FRICTION
+                self.vel.x = 0
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos
                 self.collision_types['left'] = True
@@ -132,7 +134,7 @@ class Ball(pg.sprite.Sprite):
         self.move(column_group)
 
 
-    def draw(self, screen, show_hitboxes=False):
+    def draw(self, screen, show_hitboxes=True):
         if show_hitboxes:
             pg.draw.rect(screen, (0, 255, 0), self.rect)
 

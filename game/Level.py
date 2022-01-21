@@ -1,6 +1,7 @@
 import pygame as pg
 from .Column import Column
 from .Ball import Ball
+from .Projectile import Projectile
 
 
 class Level:
@@ -28,6 +29,10 @@ class Level:
     def _create_ball(self, ball_data):
         ball1 = Ball(ball_data[1])
         self.balls.append(ball1)
+
+    def _create_projectiles(self, projectile_data):
+        for projectile in projectile_data:
+            projectile
 
     def get_column(self, n: int):
         return self.columns[n]
