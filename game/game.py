@@ -13,7 +13,7 @@ class Game:
         self.width, self.height = self.screen.get_size()
 
         self.user_interface = UserInterface()
-        self.projectile_manager = Projectile_Manager(screen)
+        self.projectile_manager = Projectile_Manager()
         self.level_manager = Level_Manager(screen, self.projectile_manager)
 
     def run(self):
@@ -83,7 +83,7 @@ class Game:
         self.level_manager.get_level().update_columns()
 
         # Update the projectiles
-        self.projectile_manager.update_projectile()
+        self.level_manager.get_level().update_projectiles()
 
         # Update the ball
         self.level_manager.get_level().update_balls()
@@ -106,7 +106,7 @@ class Game:
         self.level_manager.get_level().draw_balls()
 
         # Draw the projectiles
-        self.projectile_manager.draw_projectiles()
+        self.level_manager.get_level().draw_projectiles()
 
         # Draw the interface
         self.user_interface.draw(self.screen)

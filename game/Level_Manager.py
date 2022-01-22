@@ -13,11 +13,9 @@ class Level_Manager:
         self.level = 1
 
         # Level 1
-        L1 = Level(self.generate_level_1_column_data(), screen, self.level_1_ball_data(), projectile_manager.start_level_1)
+        L1 = Level(self.generate_level_1_column_data(), screen, self.level_1_ball_data(), projectile_manager.get_level_data(1))
         self.levels.append(L1)
-        # L1.add_background #TODO
-        # L1.add_obsticle_spikes #TODO
-        # L1.etc.etc.etc #TODO
+
 
     def get_level(self):
         return self.levels[self.level - 1]

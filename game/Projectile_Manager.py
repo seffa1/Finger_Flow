@@ -4,17 +4,29 @@ from settings import SCREEN_WIDTH, SCREEN_HEIGHT
 from .Projectile import Projectile
 
 
-# Creates random projectiles
+# Stores information for the projectiles to be passed into the level classes
 class Projectile_Manager:
-    def __init__(self, screen):
-        self.projectiles = []
-        self.projectile_group = pg.sprite.Group()
-        self.start_level_1()
-        self.screen = screen
+    def __init__(self):
+        self.level_data = {
+            1: [self.wall_1(SCREEN_WIDTH + 20, -3), self.wall_1(SCREEN_WIDTH + 520, -3)],
+            2: []
+        }
 
-    def start_level_1(self):
-        self._gen_projectiles(5, -3)
+    def get_level_data(self, n: int):
+        return self.level_data[n]
 
+
+    def wall_1(self, x, speed):
+        wall_data = {
+            'width': 50,
+            'height': 400,
+            'vel': speed,
+            'pos_x': x,
+            'pos_y': SCREEN_HEIGHT - 400,
+        }
+        return wall_data
+
+    # Currently not being used
     def _gen_projectiles(self, qty, speed):
         right = SCREEN_WIDTH
         bottom = SCREEN_HEIGHT
@@ -34,13 +46,7 @@ class Projectile_Manager:
             projectile = Projectile(cord[0], cord[1], speed)
             self.projectile_group.add(projectile)
 
-    def update_projectile(self):
-        for projectile in self.projectile_group:
-            projectile.update()
 
-    def draw_projectiles(self):
-        for projectile in self.projectile_group:
-            projectile.draw(self.screen)
 
 
 
