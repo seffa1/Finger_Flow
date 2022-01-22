@@ -3,10 +3,12 @@ from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GRAVITIES
 from .Level import Level
 
 
-
-# The level manager stores colum and ball data for each level, loads and swithces beteween levels
+# The level manager stores columns and ball data for each level, loads and swithces beteween levels
 class Level_Manager:
     def __init__(self, screen, projectile_manager):
+        # Level manager events
+        self.level_ended = pg.USEREVENT + 1
+        self.game_complete = pg.USEREVENT + 2
 
         # A list of level objects
         self.levels = []
@@ -14,8 +16,29 @@ class Level_Manager:
 
         # Level 1
         L1 = Level(self.generate_level_1_column_data(), screen, self.level_1_ball_data(), projectile_manager.get_level_data(1))
+        L1.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
         self.levels.append(L1)
 
+        # Level 2
+        L2 = Level(self.generate_level_1_column_data(), screen, self.level_1_ball_data(), projectile_manager.get_level_data(2))
+        L2.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
+        self.levels.append(L2)
+
+    def check_level_state(self):
+        # If all the levels projectile are gone (made it to the left side of the screen)
+        level = self.get_level()
+        sprite_group = level.projectile_group
+
+        # Group.sprites returns a list of contained sprites
+        # If theres no more projectiles in the group
+        if len(sprite_group.sprites()) == 0:
+            # If theres no more levels after this
+            if len(self.levels) < self.level + 1:
+                pg.time.set_timer(self.game_complete, 10)
+            # There are more levels to go to
+            else:
+                # Calls the event after 10 ms
+                pg.time.set_timer(self.level_ended, 10)
 
     def get_level(self):
         return self.levels[self.level - 1]
@@ -37,7 +60,7 @@ class Level_Manager:
                 'width': SCREEN_WIDTH / 10,
                 'height': SCREEN_HEIGHT,
                 'pos_x': (SCREEN_WIDTH / 10) * i,
-                'pos_y': (SCREEN_HEIGHT / 3) * 2,
+                'pos_y': (SCREEN_HEIGHT / 2),
                 'mass': 100,
                 'image': '',
                 'sound_up': '',
@@ -45,7 +68,7 @@ class Level_Manager:
                 'spring_constant': 0,
                 'friction': .8,
                 'force_up': -80,
-                'max_y': (SCREEN_HEIGHT / 3) * 3 - 300,
+                'max_y': SCREEN_HEIGHT - 200,
                 'gravity': GRAVITIES[1],
                 'min_y': 300
             }
@@ -83,35 +106,10 @@ class Level_Manager:
             'image_scale': (100, 100),
             'num': 1
         }
-
         balls.append(ball_1_data)
         balls.append(ball_2_data)
         return balls
 
-    def level_1_projectile_data(self):
-        projectile_data = [
-            # Projectile 1
-            {'pos_x': SCREEN_WIDTH,
-             'pos_y': SCREEN_HEIGHT/2,
-             'speed': -3,
-             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
-             'num': 1},
-
-            # Projectile 2
-            {'pos_x': -300,
-             'pos_y': SCREEN_HEIGHT/2,
-             'speed': 3,
-             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
-             'num': 2},
-
-            # Projectile 3
-            {'pos_x': SCREEN_WIDTH + 600,
-             'pos_y': SCREEN_HEIGHT/2,
-             'speed': -3,
-             'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
-             'num': 3}
-        ]
-        return projectile_data
 
 
 

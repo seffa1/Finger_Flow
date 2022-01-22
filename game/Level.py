@@ -8,6 +8,7 @@ class Level:
     def __init__(self, level_data, screen, ball_data, projectile_data):
         self.screen = screen
         self.level_data = level_data
+        self.BACKGROUND = None
 
         # Dictionary of column objects. {1: column1, 2: column2}
         self.columns = {}
@@ -46,14 +47,14 @@ class Level:
             self.projectiles.append(projectile)
             self.projectile_group.add(projectile)
 
-
-
     def get_column(self, n: int):
         return self.columns[n]
 
     def add_background(self, image):
-        # TODO
-        pass
+        self.BACKGROUND = image
+
+    def draw_background(self):
+        self.screen.blit(self.BACKGROUND, (0, 0))
 
     def update_columns(self):
         for column in self.columns.values():
@@ -78,4 +79,9 @@ class Level:
     def draw_projectiles(self):
         for projectile in self.projectile_group:
             projectile.draw(self.screen)
+
+
+
+
+
 

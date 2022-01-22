@@ -31,6 +31,19 @@ class Game:
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
+
+            if event.type == self.level_manager.level_ended:
+                print("LEVEL COMPLETE")
+                print(self.level_manager.levels)
+                self.level_manager.next_level()
+                # Stops the event from being called next frame
+                pg.time.set_timer(self.level_manager.level_ended, 0)
+
+            if event.type == self.level_manager.game_complete:
+                print("GAME COMPLETED!")
+                pg.quit()
+                sys.exit()
+
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     pg.quit()
@@ -79,14 +92,17 @@ class Game:
                     self.level_manager.get_level().get_column(10).deccelerate()
 
     def update(self):
+        # Check if the level has ended
+        self.level_manager.check_level_state()
+
         # Update the columns
         self.level_manager.get_level().update_columns()
 
-        # Update the projectiles
-        self.level_manager.get_level().update_projectiles()
-
         # Update the ball
         self.level_manager.get_level().update_balls()
+
+        # Update the projectiles
+        self.level_manager.get_level().update_projectiles()
 
         # Update the UI
         self.user_interface.update(self.clock.get_fps(),
@@ -99,14 +115,17 @@ class Game:
         # to the screen will stack up as copies over one another
         self.screen.fill((0, 0, 0))
 
+        # Draw the background
+        self.level_manager.get_level().draw_background()
+
         # Draw the columns
         self.level_manager.get_level().draw_columns()
 
-        # Draw the balls
-        self.level_manager.get_level().draw_balls()
-
         # Draw the projectiles
         self.level_manager.get_level().draw_projectiles()
+
+        # Draw the balls
+        self.level_manager.get_level().draw_balls()
 
         # Draw the interface
         self.user_interface.draw(self.screen)
