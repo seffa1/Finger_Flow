@@ -2,6 +2,7 @@ import pygame as pg
 import sys
 from .Level_Manager import Level_Manager
 from .UserInterface import UserInterface
+from .Projectile_Manager import Projectile_Manager
 
 
 
@@ -10,8 +11,10 @@ class Game:
         self.screen = screen
         self.clock = clock
         self.width, self.height = self.screen.get_size()
-        self.level_manager = Level_Manager(screen)
+
         self.user_interface = UserInterface()
+        self.projectile_manager = Projectile_Manager(screen)
+        self.level_manager = Level_Manager(screen, self.projectile_manager)
 
     def run(self):
         self.playing = True
@@ -80,7 +83,7 @@ class Game:
         self.level_manager.get_level().update_columns()
 
         # Update the projectiles
-        self.level_manager.get_level().update_projectile()
+        self.projectile_manager.update_projectile()
 
         # Update the ball
         self.level_manager.get_level().update_balls()
@@ -103,7 +106,7 @@ class Game:
         self.level_manager.get_level().draw_balls()
 
         # Draw the projectiles
-        self.level_manager.get_level().draw_projectiles()
+        self.projectile_manager.draw_projectiles()
 
         # Draw the interface
         self.user_interface.draw(self.screen)

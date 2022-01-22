@@ -4,13 +4,12 @@ import pygame as pg
 vec = pg.math.Vector2
 
 class Projectile(pg.sprite.Sprite):
-    def __init__(self, projectile_data):
+    def __init__(self, pos_x, pos_y, speed):
         super().__init__()
 
-        self.IMAGE = projectile_data['image']
-        self.pos = vec(projectile_data['pos_x'], projectile_data['pos_y'])
-        self.vel = vec(projectile_data['speed'], 0)
-        self.number = projectile_data['num']
+        self.IMAGE = pg.image.load('assets/images/ball_D20.png').convert_alpha()
+        self.pos = vec(pos_x, pos_y)
+        self.vel = vec(speed, 0)
 
         self.rect = self.IMAGE.get_rect()
 

@@ -4,8 +4,8 @@ SCREEN_HEIGHT = 1080
 
 # Different levels could have differnet gravity acceleration
 GRAVITIES = {
-    1: .7,
-    2: 1
+    1: .8,
+    2: .8
 }
 
 

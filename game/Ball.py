@@ -15,6 +15,7 @@ class Ball(pg.sprite.Sprite):
         self.MASS = ball_data['mass']
         self.FRICTION = ball_data['friction']
         self.GRAVITY = ball_data['gravity']
+        self.NUM = ball_data['num']
 
         # Moment of intertia for a sphere
         self.MOMENT_OF_INERTIA = (2/5) * self.MASS * ((self.DIAMETER/2) ** 2)

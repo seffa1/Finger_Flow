@@ -5,7 +5,7 @@ from .Projectile import Projectile
 
 
 class Level:
-    def __init__(self, level_data, screen, ball_data, projectile_data):
+    def __init__(self, level_data, screen, ball_data, projectile_manager):
         self.screen = screen
         self.level_data = level_data
         # Dictionary of column objects. {1: column1, 2: column2}
@@ -15,12 +15,17 @@ class Level:
 
         # Generate the ball for the level
         self.balls = []
-        self._create_ball(ball_data)
+        self._create_balls(ball_data)
 
+        # MOVING THIS TO THE PROJECTILE MANAGER
         # Storage for the projectiles
-        self.projectiles = {}
-        self.projectile_group = pg.sprite.Group()
-        self._create_projectiles(projectile_data)
+        # self.projectiles = {}
+        # self.projectile_group = pg.sprite.Group()
+        # self._create_projectiles(projectile_data)
+
+        # Start the projectile generator
+        projectile_manager()
+
 
 
     def _create_columns(self, level_data):
@@ -31,10 +36,14 @@ class Level:
             self.columns[column.number] = column
             self.column_group.add(column)
 
-    def _create_ball(self, ball_data):
-        ball1 = Ball(ball_data[1])
-        self.balls.append(ball1)
+    def _create_balls(self, ball_data):
+        for ball_info in ball_data:
+            ball = Ball(ball_info)
+            self.balls.append(ball)
 
+
+
+    # Moving this to the projectile manager
     def _create_projectiles(self, projectile_data):
         for projectile_info in projectile_data:
             projectile = Projectile(projectile_info)
@@ -64,10 +73,3 @@ class Level:
         for ball in self.balls:
             ball.draw(self.screen)
 
-    def update_projectile(self):
-        for projectile in self.projectiles.values():
-            projectile.update()
-
-    def draw_projectiles(self):
-        for projectile in self.projectiles.values():
-            projectile.draw(self.screen)
