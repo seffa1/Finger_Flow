@@ -30,7 +30,7 @@ class Level_Manager:
         sprite_group = level.projectile_group
 
         # Group.sprites returns a list of contained sprites
-        # If theres no more projectiles in the group
+        # If theres no more projectiles in tqhe group
         if len(sprite_group.sprites()) == 0:
             # If theres no more levels after this
             if len(self.levels) < self.level + 1:
@@ -60,7 +60,7 @@ class Level_Manager:
                 'width': SCREEN_WIDTH / 10,
                 'height': SCREEN_HEIGHT,
                 'pos_x': (SCREEN_WIDTH / 10) * i,
-                'pos_y': (SCREEN_HEIGHT / 2),
+                'pos_y': SCREEN_HEIGHT - 200,
                 'mass': 100,
                 'image': '',
                 'sound_up': '',

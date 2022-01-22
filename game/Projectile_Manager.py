@@ -17,24 +17,24 @@ class Projectile_Manager:
 
     def level_1_data(self):
         level_data = []
-        level_data.append(self.low_wall(SCREEN_WIDTH, 700, -5))
-        level_data.append(self.high_wall(SCREEN_WIDTH + 400, 400, -5))
-        level_data.append(self.low_wall(SCREEN_WIDTH + 800, 700, -5))
-        level_data.append(self.high_wall(SCREEN_WIDTH + 1200, 400, -5))
-        level_data.append(self.low_wall(SCREEN_WIDTH + 1600, 700, -5))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=700, speed=-5))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1400, height=400, speed=-5))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1800, height=700, speed=-5))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 2200, height=400, speed=-5))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 2600, height=700, speed=-5))
         return level_data
 
     def level_2_data(self):
         level_data = []
         # Low walls
-        level_data.append(self.low_wall(SCREEN_WIDTH, height=800, speed=-5))
-        level_data.append(self.low_wall(SCREEN_WIDTH + 500, height=600, speed=-5))
-        level_data.append(self.low_wall(SCREEN_WIDTH + 1000, height=400, speed=-5))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=600, speed=-5))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1500, height=400, speed=-5))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 2000, height=200, speed=-5))
 
         # High walls
-        level_data.append(self.high_wall(SCREEN_WIDTH, height=200, speed=-5))
-        level_data.append(self.high_wall(SCREEN_WIDTH + 500, height=400, speed=-5))
-        level_data.append(self.high_wall(SCREEN_WIDTH + 1000, height=600, speed=-5))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1000, height=200, speed=-5))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1500, height=400, speed=-5))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 2r000, height=600, speed=-5))
         return level_data
 
     # Low wall

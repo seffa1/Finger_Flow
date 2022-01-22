@@ -10,6 +10,14 @@ class Level:
         self.level_data = level_data
         self.BACKGROUND = None
 
+        # Used for the level starting animation
+        self.level_start = True
+        # Time keeper of the animation
+        self.timer = 0
+        # Keep track of what column we are accelerating
+        self.column_num = 1
+
+
         # Dictionary of column objects. {1: column1, 2: column2}
         self.columns = {}
         self.column_group = pg.sprite.Group()
@@ -47,6 +55,9 @@ class Level:
             self.projectiles.append(projectile)
             self.projectile_group.add(projectile)
 
+    def start_level(self):
+        self.level_start = True
+
     def get_column(self, n: int):
         return self.columns[n]
 
@@ -57,6 +68,24 @@ class Level:
         self.screen.blit(self.BACKGROUND, (0, 0))
 
     def update_columns(self):
+        if self.level_start:
+            # How long to wait before accelerating the next column
+            column_duration = 10
+
+            column = self.get_column(self.column_num)
+            print(self.timer)
+            if self.timer % column_duration == 0:
+                print("Deaccelerating")
+                column.deccelerate()
+                self.column_num += 1
+
+            if self.column_num < 11:
+                column = self.get_column(self.column_num)
+                column.accelerate()
+                self.timer += 1
+            else:
+                self.level_start = False
+
         for column in self.columns.values():
             column.update()
 
