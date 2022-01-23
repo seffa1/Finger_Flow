@@ -54,9 +54,7 @@ class Level_Manager:
                        self.projectile_manager.get_level_data(2))
             L2.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
             self.levels.append(L2)
-            print(f'Levels: {self.levels}')
             self.level += 1
-            print(f"Level: {self.level}")
 
     # Maybe all this data eventually gets moved to a JSON file #TODO
     def generate_level_1_column_data(self):
@@ -116,8 +114,25 @@ class Level_Manager:
             'image_scale': (100, 100),
             'num': 1
         }
-        balls.append(ball_1_data)
-        balls.append(ball_2_data)
+
+        # Generate 10 balls
+        for i in range (0, 10):
+            ball = {
+            'diameter': 20,
+            'mass': 6,
+            'friction': 0.5,
+            'pos_x': SCREEN_WIDTH / 10 * (i),
+            'pos_y': 6,
+            'vel_x': 0,
+            'vel_y': 0,
+            'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
+            'gravity': GRAVITIES[2],
+            'image_scale': (100, 100),
+            'num': 1
+        }
+
+            balls.append(ball)
+
         return balls
 
     def extract_ball_data(self):
@@ -139,7 +154,6 @@ class Level_Manager:
                 'num': 1
             }
             ball_data.append(ball_info)
-            print(ball_info['pos_y'])
         return ball_data
 
 

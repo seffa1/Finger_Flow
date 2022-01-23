@@ -72,7 +72,6 @@ class Level:
             column_duration = 10
 
             column = self.get_column(self.column_num)
-            print(self.timer)
             if self.timer % column_duration == 0:
                 column.deccelerate()
                 self.column_num += 1

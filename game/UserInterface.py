@@ -1,6 +1,6 @@
 import pygame as pg
 import math
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, UI
 
 
 class UserInterface:
@@ -25,14 +25,20 @@ class UserInterface:
         self.column_collisions = self.regularfont.render("0", True, self.WHITE)
 
     def update(self, fps, balls, columns):
+        if not UI:
+            return
+
         # FPS
         fps_str = f'FPS: {str(round(fps, 2))}'
         self.FPS_text = self.regularfont.render(fps_str, True, self.WHITE)
 
         # Ball Y Velocity
-        ball = balls[0]
-        ball_vel_str = f'Ball_y_vel: {str(round(ball.vel.y, 2))}'
-        self.ball_vel = self.regularfont.render(ball_vel_str, True, self.WHITE)
+        # try:
+        #     ball = balls[0]
+        #     ball_vel_str = f'Ball_y_vel: {str(round(ball.vel.y, 2))}'
+        #     self.ball_vel = self.regularfont.render(ball_vel_str, True, self.WHITE)
+        # except IndexError:
+        #       print("Ball 0 was destroyed")
 
         # Ball bottom pos
         ball_bottom = f'Ball_pos.y: {str(round(ball.rect.bottom, 2))}'
@@ -59,7 +65,7 @@ class UserInterface:
         collisions__check = f'Bottom_1=top: {ball.rect.bottom == column_1.rect.top}'
         self.collision_check = self.regularfont.render(collisions__check, True, self.WHITE)
 
-    def draw(self, screen, show_UI=True, laptop=True):
+    def draw(self, screen, laptop=False):
         x1 = SCREEN_WIDTH - 200
         x2 = 10
         y1 = 10
@@ -71,9 +77,9 @@ class UserInterface:
             y1 = 100
             y2 = 100
 
-        if show_UI:
+        if UI:
             screen.blit(self.FPS_text, (x1, y1))
-            screen.blit(self.ball_vel, (x1, y1 + offset1))
+            # screen.blit(self.ball_vel, (x1, y1 + offset1))
             screen.blit(self.col1_vel, (x1, y1 + offset1 * 2))
             screen.blit(self.ball_bottom_y, (x1, y1 + offset1 * 3))
             screen.blit(self.col1_top, (x1, y1 + offset1 * 4))
