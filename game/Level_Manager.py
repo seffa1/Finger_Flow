@@ -30,7 +30,7 @@ class Level_Manager:
         sprite_group = level.projectile_group
 
         # Group.sprites returns a list of contained sprites
-        # If theres no more projectiles in tqhe group
+        # If theres no more projectiles in the group
         if len(sprite_group.sprites()) == 0:
             # If theres no more levels after this
             if len(self.levels) < self.level + 1:
@@ -47,6 +47,8 @@ class Level_Manager:
         level = self.levels[n - 1]
 
     def next_level(self):
+        # Before we change levels we need to store the previous level's ball data and transfer that to the next level
+
         self.level += 1
 
     # Maybe all this data eventually gets moved to a JSON file #TODO

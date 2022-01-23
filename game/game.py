@@ -4,7 +4,10 @@ from .Level_Manager import Level_Manager
 from .UserInterface import UserInterface
 from .Projectile_Manager import Projectile_Manager
 
-
+# IDEA: Start with 3 to 5 balls
+# At the end of a level you gets points for collectibles * number of balls left
+# If a ball collides with projectile it gets destroyed
+# If all balls get destroyed, end the game
 
 class Game:
     def __init__(self, screen, clock):
@@ -48,47 +51,48 @@ class Game:
                 if event.key == pg.K_ESCAPE:
                     pg.quit()
                     sys.exit()
-                if event.key == pg.K_q:
+                # If you are pressing the control key and the level start animation is not playing
+                if event.key == pg.K_q and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(1).accelerate()
-                if event.key == pg.K_w:
+                if event.key == pg.K_w and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(2).accelerate()
-                if event.key == pg.K_e:
+                if event.key == pg.K_e and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(3).accelerate()
-                if event.key == pg.K_r:
+                if event.key == pg.K_r and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(4).accelerate()
-                if event.key == pg.K_c:
+                if event.key == pg.K_c and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(5).accelerate()
-                if event.key == pg.K_n:
+                if event.key == pg.K_n and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(6).accelerate()
-                if event.key == pg.K_u:
+                if event.key == pg.K_u and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(7).accelerate()
-                if event.key == pg.K_i:
+                if event.key == pg.K_i and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(8).accelerate()
-                if event.key == pg.K_o:
+                if event.key == pg.K_o and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(9).accelerate()
-                if event.key == pg.K_p:
+                if event.key == pg.K_p and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(10).accelerate()
 
             if event.type == pg.KEYUP:
-                if event.key == pg.K_q:
+                if event.key == pg.K_q and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(1).deccelerate()
-                if event.key == pg.K_w:
+                if event.key == pg.K_w and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(2).deccelerate()
-                if event.key == pg.K_e:
+                if event.key == pg.K_e and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(3).deccelerate()
-                if event.key == pg.K_r:
+                if event.key == pg.K_r and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(4).deccelerate()
-                if event.key == pg.K_c:
+                if event.key == pg.K_c and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(5).deccelerate()
-                if event.key == pg.K_n:
+                if event.key == pg.K_n and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(6).deccelerate()
-                if event.key == pg.K_u:
+                if event.key == pg.K_u and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(7).deccelerate()
-                if event.key == pg.K_i:
+                if event.key == pg.K_i and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(8).deccelerate()
-                if event.key == pg.K_o:
+                if event.key == pg.K_o and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(9).deccelerate()
-                if event.key == pg.K_p:
+                if event.key == pg.K_p and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(10).deccelerate()
 
     def update(self):

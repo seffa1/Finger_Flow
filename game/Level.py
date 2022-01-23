@@ -17,7 +17,6 @@ class Level:
         # Keep track of what column we are accelerating
         self.column_num = 1
 
-
         # Dictionary of column objects. {1: column1, 2: column2}
         self.columns = {}
         self.column_group = pg.sprite.Group()
@@ -86,6 +85,7 @@ class Level:
             else:
                 self.level_start = False
 
+        # The actual update for the columns
         for column in self.columns.values():
             column.update()
 
