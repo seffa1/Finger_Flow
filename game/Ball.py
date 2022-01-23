@@ -33,7 +33,7 @@ class Ball(pg.sprite.Sprite):
 
     # def apply_force(self, magnitude, )
 
-    def move(self, column_group):
+    def move(self, column_group, projectile_group):
         """ Move calculates the intended velocity of the ball and moves the ball in the x-direction, checks for collisions
         and updates the x-velocity and position. Then it moves the ball in the y-direction, checks for collisions in the y
         direction, and updates the y position and velocity accordingly. The rect is moved with the ball position each time."""
@@ -44,6 +44,7 @@ class Ball(pg.sprite.Sprite):
         self.collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False, 'moving_up': False}
 
         # Move the ball and rect in the x direction
+        # We are no longer moving the ball in the x direction, ever
         self.pos.x += self.vel.x
         self.rect.topleft = self.pos
 
@@ -72,13 +73,11 @@ class Ball(pg.sprite.Sprite):
                 self.rect.topleft = self.pos
                 self.collision_types['left'] = True
 
-
-
         # Move the ball and rect in the y direction
         self.pos.y += self.vel.y
         self.rect.topleft = self.pos
 
-        # Check for collisions
+        # Check for collisions with the columns
         self.collisions = pg.sprite.spritecollide(self, column_group, False)
         for column in self.collisions:
             # If ball is falling down or not moving and is collided
@@ -119,20 +118,19 @@ class Ball(pg.sprite.Sprite):
             # We don't check if the ball collided with the column above because
             # It will never happen
 
-        # Troubleshooting
-        # for column in column_group:
-        #     if self.rect.bottom > column.rect.top:
-        #         self.pos.y = column.rect.top - self.IMAGE.get_height()
-        #         self.rect.topleft = self.pos
-
+        # Check for collisions with the projectiles
+        # Returns a list of collided projectile
+        projectile_collisions = pg.sprite.spritecollide(self, projectile_group, False)
+        if len(projectile_collisions) > 0:
+            self.kill()
 
 
         # Move the rect with the image
         self.rect.topleft = self.pos
 
 
-    def update(self, column_group):
-        self.move(column_group)
+    def update(self, column_group, projectile_group):
+        self.move(column_group, projectile_group)
 
 
     def draw(self, screen, show_hitboxes=True):

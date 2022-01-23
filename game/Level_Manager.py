@@ -6,6 +6,9 @@ from .Level import Level
 # The level manager stores columns and ball data for each level, loads and swithces beteween levels
 class Level_Manager:
     def __init__(self, screen, projectile_manager):
+        self.projectile_manager = projectile_manager
+        self.screen = screen
+
         # Level manager events
         self.level_ended = pg.USEREVENT + 1
         self.game_complete = pg.USEREVENT + 2
@@ -13,16 +16,13 @@ class Level_Manager:
         # A list of level objects
         self.levels = []
         self.level = 1
+        self.TOTAL_LEVELS = 2
 
-        # Level 1
-        L1 = Level(self.generate_level_1_column_data(), screen, self.level_1_ball_data(), projectile_manager.get_level_data(1))
+        # Level 1 gets instantiated initially
+        L1 = Level(self.generate_level_1_column_data(), self.screen, self.level_1_ball_data(), self.projectile_manager.get_level_data(1))
         L1.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
         self.levels.append(L1)
 
-        # Level 2
-        L2 = Level(self.generate_level_1_column_data(), screen, self.level_1_ball_data(), projectile_manager.get_level_data(2))
-        L2.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
-        self.levels.append(L2)
 
     def check_level_state(self):
         # If all the levels projectile are gone (made it to the left side of the screen)
@@ -33,7 +33,7 @@ class Level_Manager:
         # If theres no more projectiles in the group
         if len(sprite_group.sprites()) == 0:
             # If theres no more levels after this
-            if len(self.levels) < self.level + 1:
+            if self.level == self.TOTAL_LEVELS:
                 pg.time.set_timer(self.game_complete, 10)
             # There are more levels to go to
             else:
@@ -48,8 +48,15 @@ class Level_Manager:
 
     def next_level(self):
         # Before we change levels we need to store the previous level's ball data and transfer that to the next level
-
-        self.level += 1
+        if self.level == 1:
+            # Level 2 Instantiation
+            L2 = Level(self.generate_level_1_column_data(), self.screen, self.extract_ball_data(),
+                       self.projectile_manager.get_level_data(2))
+            L2.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
+            self.levels.append(L2)
+            print(f'Levels: {self.levels}')
+            self.level += 1
+            print(f"Level: {self.level}")
 
     # Maybe all this data eventually gets moved to a JSON file #TODO
     def generate_level_1_column_data(self):
@@ -69,7 +76,7 @@ class Level_Manager:
                 'sound_down': '',
                 'spring_constant': 0,
                 'friction': .8,
-                'force_up': -80,
+                'force_up': -70,
                 'max_y': SCREEN_HEIGHT - 200,
                 'gravity': GRAVITIES[1],
                 'min_y': 300
@@ -78,6 +85,7 @@ class Level_Manager:
             i += 1
         return level1_column_data
 
+    # The initial balls at the start of the game
     def level_1_ball_data(self):
         balls = []
 
@@ -111,6 +119,29 @@ class Level_Manager:
         balls.append(ball_1_data)
         balls.append(ball_2_data)
         return balls
+
+    def extract_ball_data(self):
+        # ball_data = [{ball1_data}, {ball2_data}, {ball3_data}]
+        ball_data = []
+        # Only check the balls left in the sprite group, as they get removed when a ball gets destroyed
+        for ball in self.get_level().ball_group:
+            ball_info = {
+                'diameter': ball.DIAMETER,
+                'mass': ball.MASS,
+                'friction': ball.FRICTION,
+                'pos_x': ball.pos.x,
+                'pos_y': ball.pos.y,
+                'vel_x': 0,
+                'vel_y': 0,
+                'image': ball.IMAGE,
+                'gravity': ball.GRAVITY,
+                'image_scale': (100, 100),
+                'num': 1
+            }
+            ball_data.append(ball_info)
+            print(ball_info['pos_y'])
+        return ball_data
+
 
 
 

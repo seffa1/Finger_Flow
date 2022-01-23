@@ -74,7 +74,6 @@ class Level:
             column = self.get_column(self.column_num)
             print(self.timer)
             if self.timer % column_duration == 0:
-                print("Deaccelerating")
                 column.deccelerate()
                 self.column_num += 1
 
@@ -94,15 +93,15 @@ class Level:
             column.draw(self.screen)
 
     def update_balls(self):
-        for ball in self.balls:
-            ball.update(self.column_group)
+        for ball in self.ball_group:
+            ball.update(self.column_group, self.projectile_group)
 
     def draw_balls(self):
-        for ball in self.balls:
+        for ball in self.ball_group:
             ball.draw(self.screen)
 
     def update_projectiles(self):
-        for projectile in self.projectiles:
+        for projectile in self.projectile_group:
             projectile.update(self.ball_group)
 
     def draw_projectiles(self):
