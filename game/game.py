@@ -4,10 +4,8 @@ from .Level_Manager import Level_Manager
 from .UserInterface import UserInterface
 from .Projectile_Manager import Projectile_Manager
 
-# IDEA: Start with 3 to 5 balls
-# At the end of a level you gets points for collectibles * number of balls left
-# If a ball collides with projectile it gets destroyed
-# If all balls get destroyed, end the game
+# IDEA:
+# score per level = (level_number + collectibles) * balls left
 
 class Game:
     def __init__(self, screen, clock):

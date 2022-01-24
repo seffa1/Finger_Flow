@@ -1,5 +1,5 @@
 import pygame as pg
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GRAVITIES
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GRAVITIES, COLUMN_FORCE
 from .Level import Level
 
 
@@ -17,7 +17,7 @@ class Level_Manager:
         # A list of level objects
         self.levels = []
         self.level = 1
-        self.TOTAL_LEVELS = 3
+        self.TOTAL_LEVELS = 2
 
         # Level 1 gets instantiated initially
         L1 = Level(self.generate_level_1_column_data(), self.screen, self.level_1_ball_data(), self.projectile_manager.get_level_data(1))
@@ -86,7 +86,7 @@ class Level_Manager:
                 'sound_down': '',
                 'spring_constant': 0,
                 'friction': .8,
-                'force_up': -140,
+                'force_up': COLUMN_FORCE,
                 'max_y': SCREEN_HEIGHT - 200,
                 'gravity': GRAVITIES[1],
                 'min_y': 600
@@ -107,7 +107,7 @@ class Level_Manager:
             'pos_y': 6,
             'vel_x': 0,
             'vel_y': 0,
-            'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
+            'image': pg.image.load('assets/images/boulder.png').convert_alpha(),
             'gravity': GRAVITIES[2],
             'image_scale': (100, 100),
             'num': 1
@@ -121,7 +121,7 @@ class Level_Manager:
             'pos_y': 6,
             'vel_x': 0,
             'vel_y': 0,
-            'image': pg.image.load('assets/images/ball_D20.png').convert_alpha(),
+            'image': pg.image.load('assets/images/boulder.png').convert_alpha(),
             'gravity': GRAVITIES[2],
             'image_scale': (100, 100),
             'num': 1
