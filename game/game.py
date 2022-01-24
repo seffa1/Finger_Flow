@@ -38,8 +38,6 @@ class Game:
             if event.type == self.level_manager.level_ended:
                 print("LEVEL COMPLETE")
                 self.level_manager.next_level()
-                # Stops the event from being called next frame
-                pg.time.set_timer(self.level_manager.level_ended, 0)
 
             if event.type == self.level_manager.game_complete:
                 print("GAME COMPLETED!")

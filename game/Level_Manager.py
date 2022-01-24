@@ -11,6 +11,7 @@ class Level_Manager:
 
         # Level manager events
         self.level_ended = pg.USEREVENT + 1
+        self.level_ended_event = pg.event.Event(self.level_ended)
         self.game_complete = pg.USEREVENT + 2
 
         # A list of level objects
@@ -37,9 +38,8 @@ class Level_Manager:
                 pg.time.set_timer(self.game_complete, 10)
             # There are more levels to go to
             else:
-                print("Posting level ended event")
-                # Calls the event after 10 ms
-                pg.time.set_timer(self.level_ended, 10)
+                # post the event for the event loop to detect
+                pg.event.post(self.level_ended_event)
 
     def get_level(self):
         return self.levels[self.level - 1]
