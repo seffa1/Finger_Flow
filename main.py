@@ -1,6 +1,7 @@
 import pygame as pg
 from game.game import Game
 from settings import SCREEN_HEIGHT, SCREEN_WIDTH
+import faulthandler
 
 def main() -> None:
     # Differentiates between being at the loading menu (running) and the game running (playing)
@@ -27,5 +28,6 @@ def main() -> None:
             game.run()
 
 if __name__ == '__main__':
+    faulthandler.enable()
     main()
 
