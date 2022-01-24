@@ -6,7 +6,7 @@ UI = False
 # Different levels could have differnet gravity acceleration
 GRAVITIES = {
     1: .8,
-    2: .8
+    2: .6  # ball
 }
 
 

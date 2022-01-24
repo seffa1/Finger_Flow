@@ -86,10 +86,10 @@ class Level_Manager:
                 'sound_down': '',
                 'spring_constant': 0,
                 'friction': .8,
-                'force_up': -70,
+                'force_up': -140,
                 'max_y': SCREEN_HEIGHT - 200,
                 'gravity': GRAVITIES[1],
-                'min_y': 300
+                'min_y': 600
             }
             level1_column_data.append(column)
             i += 1
@@ -103,7 +103,7 @@ class Level_Manager:
             'diameter': 20,
             'mass': 6,
             'friction': 0.5,
-            'pos_x': 590,
+            'pos_x': 620,
             'pos_y': 6,
             'vel_x': 0,
             'vel_y': 0,
@@ -117,7 +117,7 @@ class Level_Manager:
             'diameter': 20,
             'mass': 6,
             'friction': 0.5,
-            'pos_x': 1100,
+            'pos_x': 1005,
             'pos_y': 6,
             'vel_x': 0,
             'vel_y': 0,
@@ -143,8 +143,8 @@ class Level_Manager:
             'num': 1
         }
 
-            balls.append(ball)
-
+        balls.append(ball_1_data)
+        balls.append(ball_2_data)
         return balls
 
     def extract_ball_data(self):

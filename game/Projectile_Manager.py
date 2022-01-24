@@ -33,14 +33,14 @@ class Projectile_Manager:
     def level_3_data(self):
         level_data = []
         # Low walls
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=600, speed=-5))
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1500, height=400, speed=-5))
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 2000, height=200, speed=-5))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=600, speed=-7))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1800, height=400, speed=-7))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 2500, height=200, speed=-7))
 
         # High walls
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1000, height=200, speed=-5))
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1500, height=400, speed=-5))
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 2000, height=600, speed=-5))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1000, height=100, speed=-7))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1800, height=300, speed=-7))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 2500, height=500, speed=-7))
         return level_data
 
     # Low wall

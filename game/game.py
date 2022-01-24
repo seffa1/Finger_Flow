@@ -49,26 +49,26 @@ class Game:
                     pg.quit()
                     sys.exit()
                 # If you are pressing the control key and the level start animation is not playing
-                if event.key == pg.K_q and not self.level_manager.get_level().level_start:
-                    self.level_manager.get_level().get_column(1).accelerate()
-                if event.key == pg.K_w and not self.level_manager.get_level().level_start:
-                    self.level_manager.get_level().get_column(2).accelerate()
-                if event.key == pg.K_e and not self.level_manager.get_level().level_start:
-                    self.level_manager.get_level().get_column(3).accelerate()
+                # if event.key == pg.K_q and not self.level_manager.get_level().level_start:
+                #     self.level_manager.get_level().get_column(1).accelerate()
+                # if event.key == pg.K_w and not self.level_manager.get_level().level_start:
+                #     self.level_manager.get_level().get_column(2).accelerate()
+                # if event.key == pg.K_e and not self.level_manager.get_level().level_start:
+                #     self.level_manager.get_level().get_column(3).accelerate()
                 if event.key == pg.K_r and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(4).accelerate()
-                if event.key == pg.K_c and not self.level_manager.get_level().level_start:
-                    self.level_manager.get_level().get_column(5).accelerate()
-                if event.key == pg.K_n and not self.level_manager.get_level().level_start:
-                    self.level_manager.get_level().get_column(6).accelerate()
+                # if event.key == pg.K_c and not self.level_manager.get_level().level_start:
+                #     self.level_manager.get_level().get_column(5).accelerate()
                 if event.key == pg.K_u and not self.level_manager.get_level().level_start:
-                    self.level_manager.get_level().get_column(7).accelerate()
-                if event.key == pg.K_i and not self.level_manager.get_level().level_start:
-                    self.level_manager.get_level().get_column(8).accelerate()
-                if event.key == pg.K_o and not self.level_manager.get_level().level_start:
-                    self.level_manager.get_level().get_column(9).accelerate()
-                if event.key == pg.K_p and not self.level_manager.get_level().level_start:
-                    self.level_manager.get_level().get_column(10).accelerate()
+                    self.level_manager.get_level().get_column(6).accelerate()
+                # if event.key == pg.K_u and not self.level_manager.get_level().level_start:
+                #     self.level_manager.get_level().get_column(7).accelerate()
+                # if event.key == pg.K_i and not self.level_manager.get_level().level_start:
+                #     self.level_manager.get_level().get_column(8).accelerate()
+                # if event.key == pg.K_o and not self.level_manager.get_level().level_start:
+                #     self.level_manager.get_level().get_column(9).accelerate()
+                # if event.key == pg.K_p and not self.level_manager.get_level().level_start:
+                #     self.level_manager.get_level().get_column(10).accelerate()
 
             if event.type == pg.KEYUP:
                 if event.key == pg.K_q and not self.level_manager.get_level().level_start:
@@ -81,7 +81,7 @@ class Game:
                     self.level_manager.get_level().get_column(4).deccelerate()
                 if event.key == pg.K_c and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(5).deccelerate()
-                if event.key == pg.K_n and not self.level_manager.get_level().level_start:
+                if event.key == pg.K_u and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(6).deccelerate()
                 if event.key == pg.K_u and not self.level_manager.get_level().level_start:
                     self.level_manager.get_level().get_column(7).deccelerate()

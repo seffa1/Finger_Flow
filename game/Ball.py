@@ -133,7 +133,7 @@ class Ball(pg.sprite.Sprite):
         self.move(column_group, projectile_group)
 
 
-    def draw(self, screen, show_hitboxes=True):
+    def draw(self, screen, show_hitboxes=False):
         if show_hitboxes:
             pg.draw.rect(screen, (0, 255, 0), self.rect)
 
