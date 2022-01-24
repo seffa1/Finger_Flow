@@ -9,7 +9,8 @@ class Projectile_Manager:
     def __init__(self):
         self.level_data = {
             1: self.level_1_data(),
-            2: self.level_2_data()
+            2: self.level_2_data(),
+            3: self.level_3_data()
         }
 
     def get_level_data(self, n: int):
@@ -18,13 +19,18 @@ class Projectile_Manager:
     def level_1_data(self):
         level_data = []
         level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=700, speed=-5))
+        return level_data
+
+    def level_2_data(self):
+        level_data = []
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=700, speed=-5))
         level_data.append(self.high_wall(x=SCREEN_WIDTH + 1400, height=400, speed=-5))
         level_data.append(self.low_wall(x=SCREEN_WIDTH + 1800, height=700, speed=-5))
         level_data.append(self.high_wall(x=SCREEN_WIDTH + 2200, height=400, speed=-5))
         level_data.append(self.low_wall(x=SCREEN_WIDTH + 2600, height=700, speed=-5))
         return level_data
 
-    def level_2_data(self):
+    def level_3_data(self):
         level_data = []
         # Low walls
         level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=600, speed=-5))

@@ -16,7 +16,7 @@ class Level_Manager:
         # A list of level objects
         self.levels = []
         self.level = 1
-        self.TOTAL_LEVELS = 2
+        self.TOTAL_LEVELS = 3
 
         # Level 1 gets instantiated initially
         L1 = Level(self.generate_level_1_column_data(), self.screen, self.level_1_ball_data(), self.projectile_manager.get_level_data(1))
@@ -54,6 +54,13 @@ class Level_Manager:
                        self.projectile_manager.get_level_data(2))
             L2.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
             self.levels.append(L2)
+            self.level += 1
+        if self.level == 2:
+            # Level 3 Instantiation
+            L3 = Level(self.generate_level_1_column_data(), self.screen, self.extract_ball_data(),
+                       self.projectile_manager.get_level_data(3))
+            L3.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
+            self.levels.append(L3)
             self.level += 1
 
     # Maybe all this data eventually gets moved to a JSON file #TODO
