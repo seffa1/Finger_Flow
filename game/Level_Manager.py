@@ -48,10 +48,8 @@ class Level_Manager:
         level = self.levels[n - 1]
 
     def next_level(self):
-        print("calling next_level")
         # Before we change levels we need to store the previous level's ball data and transfer that to the next level
         if self.level == 1:
-            print("Changing to level 2")
             # Level 2 Instantiation
             L2 = Level(self.generate_level_1_column_data(), self.screen, self.extract_ball_data(),
                        self.projectile_manager.get_level_data(2))
@@ -62,12 +60,10 @@ class Level_Manager:
 
         elif self.level == 2:
             # Level 3 Instantiation
-            print("Changing to level 3")
             L3 = Level(self.generate_level_1_column_data(), self.screen, self.extract_ball_data(),
                        self.projectile_manager.get_level_data(3))
             L3.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
             self.levels.append(L3)
-
             self.level += 1
             return
 
