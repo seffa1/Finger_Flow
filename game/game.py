@@ -16,8 +16,8 @@ class Game:
 
         self.user_interface = UserInterface()
         self.projectile_manager = Projectile_Manager()
-        self.level_manager = Level_Manager(screen, self.projectile_manager)
-        self.particle_manager = Projectile_Manager()
+        self.particle_manager = Particle_Manager(screen)
+        self.level_manager = Level_Manager(screen, self.projectile_manager, self.particle_manager)
 
     def run(self):
         self.playing = True
@@ -44,8 +44,8 @@ class Game:
                 pg.quit()
                 sys.exit()
 
-            # if event.type == self.level_manager.get_level().balls.em:
-            #     print("LEVEL COMPLETE")
+            # if event.type == self.level_manager.get_level().emmit:
+            #     print("Emmiting Particles")
             #     self.level_manager.next_level()
 
             if event.type == pg.KEYDOWN:
@@ -110,7 +110,7 @@ class Game:
         self.level_manager.get_level().update_projectiles()
 
         # Update the particles
-        self.particle_manager.update()
+        self.particle_manager.update_particles()
 
         # Update the UI
         self.user_interface.update(self.clock.get_fps(),
@@ -136,7 +136,7 @@ class Game:
         self.level_manager.get_level().draw_balls()
 
         # Draw the particles
-        self.particle_manager.draw()
+        self.particle_manager.draw_particles()
 
         # Draw the interface
         self.user_interface.draw(self.screen)

@@ -5,7 +5,8 @@ from .Projectile import Projectile
 
 
 class Level:
-    def __init__(self, level_data, screen, ball_data, projectile_data):
+    def __init__(self, level_data, screen, ball_data, projectile_data, particle_manager):
+        self.particle_manager = particle_manager
         self.screen = screen
         self.level_data = level_data
         self.BACKGROUND = None
@@ -21,6 +22,7 @@ class Level:
         self.columns = {}
         self.column_group = pg.sprite.Group()
         self._create_columns(self.level_data)
+        self.max_y = self.columns[1].MAX_Y
 
         # Generate the ball for the level
         self.balls = []
@@ -31,6 +33,11 @@ class Level:
         self.projectiles = []
         self.projectile_group = pg.sprite.Group()
         self._create_projectiles(projectile_data)
+
+        # Particle Event
+        self.emmit = pg.USEREVENT + 3
+        self.emmit_particles = pg.event.Event(self.emmit)
+
 
     def _create_columns(self, level_data):
         """ Creates column objects from column information passed in """
@@ -93,7 +100,17 @@ class Level:
 
     def update_balls(self):
         for ball in self.ball_group:
-            ball.update(self.column_group, self.projectile_group)
+            prev_collision = ball.collision_types['bottom']
+            prev_vel = ball.vel.y
+            # print(f'prev bottom: {prev_collision}')
+            ball.update(self.column_group, self.projectile_group, self.max_y)
+            curent_collision = ball.collision_types['bottom']
+            # If the ball just changed from not being collided on the bottom, to being collided
+            # print(f'current bottom: {curent_collision}')
+            if not prev_collision and curent_collision:
+                print("emmiting particles!")
+                self.particle_manager.emmit(ball.pos, prev_vel)
+
 
     def draw_balls(self):
         for ball in self.ball_group:
