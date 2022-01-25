@@ -23,7 +23,8 @@ class Column(pg.sprite.Sprite):
         self.FRICTION = column_data['friction']
         self.FORCE_UP = column_data['force_up']
         self.GRAVITY = column_data['gravity']
-        self.IMAGE = pg.image.load('assets/images/column1.png').convert()
+        self.IMAGE = pg.image.load('assets/images/column2.png').convert()
+        self.IMAGE = pg.transform.scale(self.IMAGE, (192, 1080))
 
         # Column movement
         self.pos = vec(column_data['pos_x'], column_data['pos_y'])
