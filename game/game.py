@@ -18,11 +18,10 @@ class Game:
         self.user_interface = UserInterface()
         self.projectile_manager = Projectile_Manager()
         self.particle_manager = Particle_Manager(screen)
-        self.level_manager = Level_Manager(screen, self.projectile_manager, self.particle_manager)
+
         self.music_manager = Music_Manager()
         self.music_manager.load_music('background')
-
-
+        self.level_manager = Level_Manager(screen, self.projectile_manager, self.particle_manager, self.music_manager)
 
     def run(self):
         self.playing = True
@@ -48,10 +47,6 @@ class Game:
                 print("GAME COMPLETED!")
                 pg.quit()
                 sys.exit()
-
-            # if event.type == self.level_manager.get_level().emmit:
-            #     print("Emmiting Particles")
-            #     self.level_manager.next_level()
 
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:

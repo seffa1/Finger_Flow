@@ -1,10 +1,12 @@
+import random
+
 import pygame as pg
 
 
 vec = pg.math.Vector2
 
 class Ball(pg.sprite.Sprite):
-    def __init__(self, ball_data):
+    def __init__(self, ball_data, music_manager):
         super().__init__()
 
         # Info for rotational physics
@@ -17,6 +19,7 @@ class Ball(pg.sprite.Sprite):
         self.FRICTION = ball_data['friction']
         self.GRAVITY = ball_data['gravity']
         self.NUM = ball_data['num']
+        self.music_manager = music_manager
 
 
         # Moment of intertia for a sphere
@@ -135,6 +138,13 @@ class Ball(pg.sprite.Sprite):
         projectile_collisions = pg.sprite.spritecollide(self, projectile_group, False)
         if len(projectile_collisions) > 0:
             self.kill()
+            # Play one of two sounds
+            num = random.randint(1, 2)
+            if num == 1:
+                self.music_manager.load_sound('rock_pour1', .7)
+            else:
+                self.music_manager.load_sound('rock_pour2', .7)
+
 
 
         # Move the rect with the image

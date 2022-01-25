@@ -77,6 +77,7 @@ class UserInterface:
             y1 = 100
             y2 = 100
 
+        # UI for troubleshooting
         if UI:
             screen.blit(self.FPS_text, (x1, y1))
             # screen.blit(self.ball_vel, (x1, y1 + offset1))

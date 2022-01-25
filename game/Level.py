@@ -1,3 +1,5 @@
+import random
+
 import pygame as pg
 from .Column import Column
 from .Ball import Ball
@@ -5,8 +7,9 @@ from .Projectile import Projectile
 
 
 class Level:
-    def __init__(self, level_data, screen, ball_data, projectile_data, particle_manager):
+    def __init__(self, level_data, screen, ball_data, projectile_data, particle_manager, music_manager):
         self.particle_manager = particle_manager
+        self.music_manager = music_manager
         self.screen = screen
         self.level_data = level_data
         self.BACKGROUND = None
@@ -34,11 +37,6 @@ class Level:
         self.projectile_group = pg.sprite.Group()
         self._create_projectiles(projectile_data)
 
-        # Particle Event
-        self.emmit = pg.USEREVENT + 3
-        self.emmit_particles = pg.event.Event(self.emmit)
-
-
     def _create_columns(self, level_data):
         """ Creates column objects from column information passed in """
         # Level data is a list of dictionaries for each column [{}, {}, {}, {}... {}]
@@ -49,7 +47,7 @@ class Level:
 
     def _create_balls(self, ball_data):
         for ball_info in ball_data:
-            ball = Ball(ball_info)
+            ball = Ball(ball_info, self.music_manager)
             self.balls.append(ball)
             self.ball_group.add(ball)
 
@@ -111,6 +109,11 @@ class Level:
                 print("emmiting particles!")
                 self.particle_manager.emmit(ball.pos, prev_vel)
 
+                # Randomly play a sound
+                sound_num = random.randint(2, 6)
+                sound_key_list = list(self.music_manager.sounds)
+                sound = sound_key_list[sound_num]
+                self.music_manager.load_sound(sound, .4)
 
     def draw_balls(self):
         for ball in self.ball_group:

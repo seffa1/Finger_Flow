@@ -5,10 +5,11 @@ from .Level import Level
 
 # The level manager stores columns and ball data for each level, loads and swithces beteween levels
 class Level_Manager:
-    def __init__(self, screen, projectile_manager, particle_manager):
+    def __init__(self, screen, projectile_manager, particle_manager, music_manager):
         self.projectile_manager = projectile_manager
         self.particle_manager = particle_manager
         self.screen = screen
+        self.music_manager = music_manager
 
         # Level manager events
         self.level_ended = pg.USEREVENT + 1
@@ -22,7 +23,8 @@ class Level_Manager:
         self.TOTAL_LEVELS = 2
 
         # Level 1 gets instantiated initially
-        L1 = Level(self.generate_level_1_column_data(), self.screen, self.level_1_ball_data(), self.projectile_manager.get_level_data(1), self.particle_manager)
+        L1 = Level(self.generate_level_1_column_data(), self.screen, self.level_1_ball_data(),
+                   self.projectile_manager.get_level_data(1), self.particle_manager, self.music_manager)
         L1.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
         self.levels.append(L1)
 
@@ -54,7 +56,7 @@ class Level_Manager:
         if self.level == 1:
             # Level 2 Instantiation
             L2 = Level(self.generate_level_1_column_data(), self.screen, self.extract_ball_data(),
-                       self.projectile_manager.get_level_data(2), self.particle_manager)
+                       self.projectile_manager.get_level_data(2), self.particle_manager, self.music_manager)
             L2.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
             self.levels.append(L2)
             self.level += 1
@@ -63,7 +65,7 @@ class Level_Manager:
         elif self.level == 2:
             # Level 3 Instantiation
             L3 = Level(self.generate_level_1_column_data(), self.screen, self.extract_ball_data(),
-                       self.projectile_manager.get_level_data(3), self.particle_manager)
+                       self.projectile_manager.get_level_data(3), self.particle_manager, self.music_manager)
             L3.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
             self.levels.append(L3)
             self.level += 1
