@@ -14,7 +14,6 @@ class Particle_Manager:
         """ Generates particles based on ball info and adds them to a sprite group """
         # ball_vel is from 0 to 22 on average
         scaler = int(round(ball_vel / 10))
-        qty = scaler
         # print(f'scaler: {scaler}, qty: {qty}')
         for i in range(0, 10 + 10 * scaler):
             pos = (ball_pos.x + 50, ball_pos.y + 100)

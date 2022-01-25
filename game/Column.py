@@ -23,6 +23,7 @@ class Column(pg.sprite.Sprite):
         self.FRICTION = column_data['friction']
         self.FORCE_UP = column_data['force_up']
         self.GRAVITY = column_data['gravity']
+        self.IMAGE = pg.image.load('assets/images/column1.png').convert()
 
         # Column movement
         self.pos = vec(column_data['pos_x'], column_data['pos_y'])
@@ -86,3 +87,5 @@ class Column(pg.sprite.Sprite):
         # screen.blit(self.image, (self.pos_x, self.pos_y))
         if show_hitboxes:
             pg.draw.rect(screen, (255, 0, 0), self.rect)
+
+        screen.blit(self.IMAGE, (self.pos.x, self.pos.y))
