@@ -16,6 +16,8 @@ class Ball(pg.sprite.Sprite):
         self.FRICTION = ball_data['friction']
         self.GRAVITY = ball_data['gravity']
         self.NUM = ball_data['num']
+        self.emmit = pg.USEREVENT + 3
+        self.emmit_particles = pg.event.Event(self.emmit)
 
         # Moment of intertia for a sphere
         self.MOMENT_OF_INERTIA = (2/5) * self.MASS * ((self.DIAMETER/2) ** 2)
@@ -72,6 +74,7 @@ class Ball(pg.sprite.Sprite):
                 # Move the rect with the ball image
                 self.rect.topleft = self.pos
                 self.collision_types['left'] = True
+            pg.event.post(self.emmit)
 
         # Move the ball and rect in the y direction
         self.pos.y += self.vel.y
@@ -98,6 +101,7 @@ class Ball(pg.sprite.Sprite):
                     self.pos.y = column.rect.top - self.IMAGE.get_height()
                     # Move the rect with the ball image
                     self.rect.topleft = self.pos
+
 
 
             # The ball is moving upward with the column colliding beneath it

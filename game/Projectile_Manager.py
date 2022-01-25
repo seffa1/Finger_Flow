@@ -68,7 +68,6 @@ class Projectile_Manager:
         return wall_data
 
 
-
     # Currently not being used
     def _gen_projectiles(self, qty, speed):
         right = SCREEN_WIDTH

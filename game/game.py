@@ -3,6 +3,7 @@ import sys
 from .Level_Manager import Level_Manager
 from .UserInterface import UserInterface
 from .Projectile_Manager import Projectile_Manager
+from .Particles import Particle_Manager
 
 # IDEA:
 # score per level = (level_number + collectibles) * balls left
@@ -16,6 +17,7 @@ class Game:
         self.user_interface = UserInterface()
         self.projectile_manager = Projectile_Manager()
         self.level_manager = Level_Manager(screen, self.projectile_manager)
+        self.particle_manager = Projectile_Manager()
 
     def run(self):
         self.playing = True
@@ -41,6 +43,10 @@ class Game:
                 print("GAME COMPLETED!")
                 pg.quit()
                 sys.exit()
+
+            # if event.type == self.level_manager.get_level().balls.em:
+            #     print("LEVEL COMPLETE")
+            #     self.level_manager.next_level()
 
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
@@ -103,6 +109,9 @@ class Game:
         # Update the projectiles
         self.level_manager.get_level().update_projectiles()
 
+        # Update the particles
+        self.particle_manager.update()
+
         # Update the UI
         self.user_interface.update(self.clock.get_fps(),
                                    self.level_manager.get_level().balls,
@@ -125,6 +134,9 @@ class Game:
 
         # Draw the balls
         self.level_manager.get_level().draw_balls()
+
+        # Draw the particles
+        self.particle_manager.draw()
 
         # Draw the interface
         self.user_interface.draw(self.screen)
