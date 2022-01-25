@@ -11,7 +11,7 @@ GRAVITIES = {
 
 LEVEL_SPEEDS = {
     1: -4,
-    2: -7
+    2: -6.75
 }
 
 

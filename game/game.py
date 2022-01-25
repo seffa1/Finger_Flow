@@ -4,6 +4,7 @@ from .Level_Manager import Level_Manager
 from .UserInterface import UserInterface
 from .Projectile_Manager import Projectile_Manager
 from .Particles import Particle_Manager
+from .Music_Manager import Music_Manager
 
 # IDEA:
 # score per level = (level_number + collectibles) * balls left
@@ -18,6 +19,10 @@ class Game:
         self.projectile_manager = Projectile_Manager()
         self.particle_manager = Particle_Manager(screen)
         self.level_manager = Level_Manager(screen, self.projectile_manager, self.particle_manager)
+        self.music_manager = Music_Manager()
+        self.music_manager.load_music('background')
+
+
 
     def run(self):
         self.playing = True
