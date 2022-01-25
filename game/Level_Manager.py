@@ -146,7 +146,7 @@ class Level_Manager:
         }
 
         balls.append(ball_1_data)
-        # balls.append(ball_2_data)
+        balls.append(ball_2_data)
         return balls
 
     def extract_ball_data(self):

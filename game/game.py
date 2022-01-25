@@ -132,11 +132,16 @@ class Game:
         # Draw the projectiles
         self.level_manager.get_level().draw_projectiles()
 
+        # Draw the particles
+        # self.particle_manager.draw_particles()
+
         # Draw the balls
         self.level_manager.get_level().draw_balls()
 
         # Draw the particles
         self.particle_manager.draw_particles()
+
+
 
         # Draw the interface
         self.user_interface.draw(self.screen)

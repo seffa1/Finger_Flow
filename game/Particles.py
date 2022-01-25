@@ -19,9 +19,9 @@ class Particle_Manager:
         for i in range(0, 20):
             pos = (ball_pos.x + 50, ball_pos.y + 100)
             vel_x = random.randint(-4, 4)
-            vel_y = random.randint(2, 4 + scaler) * -1
+            vel_y = random.randint(2, 4) * -1 + scaler * -1
             vel = vec(vel_x, vel_y)
-            diameter = random.randint(4, 4)
+            diameter = random.randint(3, 4)
             particle = Particle(pos, vel, diameter)
             self.particles.add(particle)
 
@@ -46,9 +46,9 @@ class Particle(pg.sprite.Sprite):
         # Used to keep track of time
         self.delta_tick = 0
         # How many ticks until we change the diameter
-        self.diameter_time = 60
+        self.diameter_time = 30
         # How much the diameter will change
-        self.diameter_delta = self.diameter - (self.diameter * .1)
+        self.diameter_delta = self.diameter - 1
 
     def update(self):
         self.vel.y += self.GRAVITY
@@ -57,8 +57,8 @@ class Particle(pg.sprite.Sprite):
         self.delta_tick += 1
         if self.delta_tick % self.diameter_time == 0:
             self.diameter -= self.diameter_delta
-            if self.diameter <= .1:
+            if self.delta_tick > 120 * self.vel.y:
                 self.kill()
 
     def draw(self, screen):
-        pg.draw.circle(screen, (255, 255, 255), self.pos, self.diameter)
+        pg.draw.circle(screen, (124, 112, 112), self.pos, self.diameter)
