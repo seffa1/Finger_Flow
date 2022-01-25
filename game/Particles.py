@@ -15,8 +15,8 @@ class Particle_Manager:
         # ball_vel is from 0 to 22 on average
         scaler = int(round(ball_vel / 10))
         qty = scaler
-        print(f'scaler: {scaler}, qty: {qty}')
-        for i in range(0, 20):
+        # print(f'scaler: {scaler}, qty: {qty}')
+        for i in range(0, 10 + 10 * scaler):
             pos = (ball_pos.x + 50, ball_pos.y + 100)
             vel_x = random.randint(-4, 4)
             vel_y = random.randint(2, 6) * -1 + scaler * -1
