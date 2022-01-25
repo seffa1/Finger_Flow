@@ -41,7 +41,7 @@ class Particle(pg.sprite.Sprite):
         self.vel = vec(vel)
         self.rect = pg.Rect(self.pos.x, self.pos.y, 3, 10)
         self.diameter = diameter
-        self.GRAVITY = .2
+        self.GRAVITY = random.randint(15, 25) / 100
 
         # Used to keep track of time
         self.delta_tick = 0
