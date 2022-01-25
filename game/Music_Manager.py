@@ -17,7 +17,6 @@ class Music_Manager:
         self.sounds['rock_hit4'] = 'assets/sounds/OS_BBL_Rock_Hit_4.wav'
         self.sounds['rock_hit5'] = 'assets/sounds/RockDropSmall_S08FO.2166.wav'
 
-
     def load_sound(self, name, volume):
         sound_effect = pg.mixer.Sound(self.sounds[name])
         sound_effect.set_volume(volume)

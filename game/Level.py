@@ -7,9 +7,10 @@ from .Projectile import Projectile
 
 
 class Level:
-    def __init__(self, level_data, screen, ball_data, projectile_data, particle_manager, music_manager):
+    def __init__(self, level_data, screen, ball_data, projectile_data, particle_manager, music_manager, level_manager):
         self.particle_manager = particle_manager
         self.music_manager = music_manager
+        self.level_manager = level_manager
         self.screen = screen
         self.level_data = level_data
         self.BACKGROUND = None
@@ -47,7 +48,7 @@ class Level:
 
     def _create_balls(self, ball_data):
         for ball_info in ball_data:
-            ball = Ball(ball_info, self.music_manager)
+            ball = Ball(ball_info, self.music_manager, self.level_manager)
             self.balls.append(ball)
             self.ball_group.add(ball)
 

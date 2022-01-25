@@ -1,12 +1,10 @@
 import random
-
 import pygame as pg
-
-
 vec = pg.math.Vector2
 
+
 class Ball(pg.sprite.Sprite):
-    def __init__(self, ball_data, music_manager):
+    def __init__(self, ball_data, music_manager, level_manager):
         super().__init__()
 
         # Info for rotational physics
@@ -20,6 +18,7 @@ class Ball(pg.sprite.Sprite):
         self.GRAVITY = ball_data['gravity']
         self.NUM = ball_data['num']
         self.music_manager = music_manager
+        self.level_manager = level_manager
 
 
         # Moment of intertia for a sphere
@@ -124,11 +123,6 @@ class Ball(pg.sprite.Sprite):
                     # Move the rect with the ball image
                     self.rect.topleft = self.pos
 
-
-
-
-
-
             # # If ball is moving up and collided
             # We don't check if the ball collided with the column above because
             # It will never happen
@@ -145,7 +139,7 @@ class Ball(pg.sprite.Sprite):
             else:
                 self.music_manager.load_sound('rock_pour2', .7)
 
-
+            self.level_manager.particle_manager.emmit(self.pos, 37)
 
         # Move the rect with the image
         self.rect.topleft = self.pos
