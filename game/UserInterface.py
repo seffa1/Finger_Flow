@@ -20,13 +20,18 @@ class UserInterface:
         self.score = 0
         self.score_text = self.regularfont.render('0', True, self.BLACK)
 
+        self.multiplier = 2
+        self.multiplier_text = self.largefont.render('02', True, self.BLACK)
+
     def add_point(self, ball_group):
         for ball in ball_group.sprites():
             self.score += 1
 
-    def update(self, fps, balls, columns):
+    def update(self, fps, ball_group, columns):
         if not UI:
             return
+        if len(ball_group.sprites()) == 1:
+            self.multiplier = 1
 
         # FPS
         fps_str = f'FPS: {str(round(fps, 2))}'
@@ -35,6 +40,10 @@ class UserInterface:
         # Score
         score_string = f'Score: {str(self.score)}'
         self.score_text = self.largefont.render(score_string, True, self.BLACK)
+
+        # Multiplier
+        multiplier_string = f'Multiplier: {str(self.multiplier)}'
+        self.multiplier_text = self.largefont.render(multiplier_string, True, self.BLACK)
 
     def draw(self, screen, laptop=True):
         x1 = SCREEN_WIDTH - 200
@@ -52,4 +61,5 @@ class UserInterface:
         if UI:
             screen.blit(self.FPS_text, (x1, y1))
             screen.blit(self.score_text, (x2, y2))
+            screen.blit(self.multiplier_text, (x2, y2 + 45))
 
