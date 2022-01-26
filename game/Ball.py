@@ -7,6 +7,8 @@ class Ball(pg.sprite.Sprite):
     def __init__(self, ball_data, music_manager, level_manager):
         super().__init__()
 
+
+
         # Info for rotational physics
         # https://www.khanacademy.org/science/physics/torque-angular-momentum/torque-tutorial/v/rotational-kinetic-energy
 

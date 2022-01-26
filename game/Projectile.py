@@ -17,6 +17,10 @@ class Projectile(pg.sprite.Sprite):
 
         self.rect = pg.Rect(self.pos.x, self.pos.y, self.WIDTH, self.HEIGHT)
 
+        # Events
+        self.get_point = pg.USEREVENT + 3
+        self.get_point_event = pg.event.Event(self.get_point)
+
     def update(self, ball_group):
         self.pos.x += self.vel.x
         self.rect.topleft = self.pos
@@ -31,6 +35,7 @@ class Projectile(pg.sprite.Sprite):
         # Remove it
         if self.pos.x < 0 - self.WIDTH - 10:
             self.kill()
+            pg.event.post(self.get_point_event)
 
 
     def draw(self, screen, show_hitboxes=True):

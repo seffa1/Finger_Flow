@@ -15,7 +15,7 @@ class Level_Manager:
         self.level_ended = pg.USEREVENT + 1
         self.level_ended_event = pg.event.Event(self.level_ended)
         self.game_complete = pg.USEREVENT + 2
-
+        self.game_complete_event = pg.event.Event(self.game_complete)
 
         # A list of level objects
         self.levels = []
@@ -33,13 +33,20 @@ class Level_Manager:
         # If all the levels projectile are gone (made it to the left side of the screen)
         level = self.get_level()
         sprite_group = level.projectile_group
+        ball_group = level.ball_group
+
+        # Check if all the balls have been destroyed
+        if len(ball_group.sprites()) == 0:
+            # End the game
+            pg.event.post(self.game_complete_event)
 
         # Group.sprites returns a list of contained sprites
         # If theres no more projectiles in the group
         if len(sprite_group.sprites()) == 0:
             # If theres no more levels after this
             if self.level == self.TOTAL_LEVELS:
-                pg.time.set_timer(self.game_complete, 10)
+                # End the game
+                pg.event.post(self.game_complete_event)
             # There are more levels to go to
             else:
                 # post the event for the event loop to detect

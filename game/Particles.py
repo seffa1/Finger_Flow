@@ -10,6 +10,7 @@ class Particle_Manager:
         self.particles = pg.sprite.Group()
         self.screen = screen
 
+
     def emmit(self, ball_pos: vec, ball_vel):
         """ Generates particles based on ball info and adds them to a sprite group """
         # ball_vel is from 0 to 22 on average

@@ -39,11 +39,15 @@ class Game:
                 pg.quit()
                 sys.exit()
 
+            if event.type == pg.USEREVENT + 3:
+                self.user_interface.add_point(self.level_manager.get_level().ball_group)
+
             if event.type == self.level_manager.level_ended:
                 print("LEVEL COMPLETE")
                 self.level_manager.next_level()
 
             if event.type == self.level_manager.game_complete:
+                # Eventually well queue a game over screen with our score #TODO
                 print("GAME COMPLETED!")
                 pg.quit()
                 sys.exit()
@@ -114,7 +118,7 @@ class Game:
 
         # Update the UI
         self.user_interface.update(self.clock.get_fps(),
-                                   self.level_manager.get_level().balls,
+                                   self.level_manager.get_level().ball_group,
                                    self.level_manager.get_level().columns
                                    )
 
@@ -132,16 +136,11 @@ class Game:
         # Draw the projectiles
         self.level_manager.get_level().draw_projectiles()
 
-        # Draw the particles
-        # self.particle_manager.draw_particles()
-
         # Draw the balls
         self.level_manager.get_level().draw_balls()
 
         # Draw the particles
         self.particle_manager.draw_particles()
-
-
 
         # Draw the interface
         self.user_interface.draw(self.screen)

@@ -1,6 +1,6 @@
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
-UI = False
+UI = True
 
 COLUMN_FORCE = -60
 # Different levels could have different gravity acceleration
