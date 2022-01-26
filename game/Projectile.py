@@ -10,6 +10,8 @@ class Projectile(pg.sprite.Sprite):
         self.HEIGHT = projectile_data['height']
         self.pos = vec(projectile_data['pos_x'], projectile_data['pos_y'])
         self.vel = vec(projectile_data['vel'], 0)
+        self.IMAGE = pg.image.load('assets/images/projectile_nowhite.png').convert_alpha()
+        self.IMAGE_SCALED = pg.transform.scale(self.IMAGE, (self.WIDTH, self.IMAGE.get_height()))
 
         self.color = (0, 0, 0)
         self.collisions = None
@@ -44,7 +46,9 @@ class Projectile(pg.sprite.Sprite):
                 pg.draw.rect(screen, (0, 255, 0), self.rect)
             else:
                 pg.draw.rect(screen, (255, 0, 255), self.rect)
-
-        # screen.blit(self.IMAGE, (self.pos.x, self.pos.y))
-
+        # Draws the image differently based on if its a top wall or bottom wall
+        if self.pos.y > 0:
+            screen.blit(self.IMAGE_SCALED, (self.pos.x, self.pos.y))
+        else:
+            screen.blit(self.IMAGE_SCALED, (self.pos.x, self.pos.y - self.HEIGHT - 8))
 

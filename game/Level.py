@@ -74,6 +74,7 @@ class Level:
 
     def update_columns(self):
         if self.level_start:
+            # Level start animation
             # How long to wait before accelerating the next column
             column_duration = 10
 

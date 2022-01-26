@@ -54,7 +54,7 @@ class Game:
                 # For the remaining projectiles...
                 for projectile in self.level_manager.get_level().projectile_group.sprites():
                     # stop them from moving, so the level never ends
-                    projectile.vel = 0
+                    projectile.vel.x = -0.05
 
 
             if event.type == pg.KEYDOWN:
