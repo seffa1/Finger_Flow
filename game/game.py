@@ -11,6 +11,8 @@ from .Music_Manager import Music_Manager
 
 class Game:
     def __init__(self, screen, clock):
+        self.playing = False
+
         self.screen = screen
         self.clock = clock
         self.width, self.height = self.screen.get_size()
@@ -49,8 +51,11 @@ class Game:
             if event.type == self.level_manager.game_complete:
                 # Eventually well queue a game over screen with our score #TODO
                 print("GAME COMPLETED!")
-                pg.quit()
-                sys.exit()
+                # For the remaining projectiles...
+                for projectile in self.level_manager.get_level().projectile_group.sprites():
+                    # stop them from moving, so the level never ends
+                    projectile.vel = 0
+
 
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:

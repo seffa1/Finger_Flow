@@ -28,6 +28,7 @@ def main() -> None:
             # game loop here
             game.run()
 
+
 if __name__ == '__main__':
     faulthandler.enable()
     main()
