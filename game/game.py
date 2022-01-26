@@ -11,7 +11,9 @@ from .Music_Manager import Music_Manager
 
 class Game:
     def __init__(self, screen, clock):
+        self.start_screen = False
         self.playing = False
+        self.game_over = False
 
         self.screen = screen
         self.clock = clock
@@ -27,9 +29,27 @@ class Game:
 
     def run(self):
         self.playing = True
+        if self.start_screen:
+            # Show the start screen
+            # Explain the controls
+            # Space to start the game
+            # Set self.start_screen to false
+            pass
 
         # Game loop
         while self.playing:
+            if self.game_over:
+                # Show game over screen which includes their score
+                # They must press spacebar to continue
+
+                # Reset all game parameters and go back to level 1
+                self.user_interface = UserInterface()
+                self.projectile_manager = Projectile_Manager()
+                self.particle_manager = Particle_Manager(self.screen)
+                self.level_manager = Level_Manager(self.screen, self.projectile_manager, self.particle_manager,
+                                                   self.music_manager)
+                self.game_over = False
+
             self.clock.tick(60)
             self.events()
             self.update()
@@ -54,7 +74,8 @@ class Game:
                 # For the remaining projectiles...
                 for projectile in self.level_manager.get_level().projectile_group.sprites():
                     # stop them from moving, so the level never ends
-                    projectile.vel.x = -0.05
+                    projectile.vel.x = 0
+                    self.game_over = True
 
 
             if event.type == pg.KEYDOWN:

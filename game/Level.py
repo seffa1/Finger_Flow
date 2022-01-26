@@ -108,7 +108,6 @@ class Level:
             # If the ball just changed from not being collided on the bottom, to being collided
             # print(f'current bottom: {curent_collision}')
             if not prev_collision and curent_collision:
-                print("emmiting particles!")
                 self.particle_manager.emmit(ball.pos, prev_vel)
 
                 # Randomly play a sound

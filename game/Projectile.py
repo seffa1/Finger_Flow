@@ -47,8 +47,10 @@ class Projectile(pg.sprite.Sprite):
             else:
                 pg.draw.rect(screen, (255, 0, 255), self.rect)
         # Draws the image differently based on if its a top wall or bottom wall
+        # If its a low wal
         if self.pos.y > 0:
             screen.blit(self.IMAGE_SCALED, (self.pos.x, self.pos.y))
         else:
+            # If its a high wall
             screen.blit(self.IMAGE_SCALED, (self.pos.x, self.pos.y - self.HEIGHT - 8))
 
