@@ -24,7 +24,7 @@ class Music_Manager:
         # Only one music track can be playing at a time
         # Volume ranges from 0 to 1. Use decimal values
 
-    def load_music(self, name, volume=1, num=-1):
+    def load_music(self, name, volume=3, num=-1):
         pg.mixer.music.set_volume(volume)
         pg.mixer.music.load(self.music[name])
         # num determines how long the music plays, -1 means the music will loop indefinetly

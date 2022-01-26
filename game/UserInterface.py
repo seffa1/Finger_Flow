@@ -12,8 +12,8 @@ class UserInterface:
         self.WHITE = (255, 255, 255)
 
         self.smallfont = pg.font.SysFont("Verdana", 10)
-        self.regularfont = pg.font.SysFont("Verdana", 20)
-        self.largefont = pg.font.SysFont("Verdana", 40)
+        self.regularfont = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 20)
+        self.largefont = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 25)
 
         self.FPS_text = self.regularfont.render("0", True, self.GREEN)
 
@@ -35,7 +35,7 @@ class UserInterface:
 
         # FPS
         fps_str = f'FPS: {str(round(fps, 2))}'
-        self.FPS_text = self.regularfont.render(fps_str, True, self.BLACK)
+        self.FPS_text = self.largefont.render(fps_str, True, self.BLACK)
 
         # Score
         score_string = f'Score: {str(self.score)}'
@@ -53,7 +53,7 @@ class UserInterface:
         offset1 = 30
         if laptop:
             x1 = SCREEN_WIDTH - 400
-            x2 = 200
+            x2 = 180
             y1 = 100
             y2 = 100
 
@@ -61,5 +61,5 @@ class UserInterface:
         if UI:
             screen.blit(self.FPS_text, (x1, y1))
             screen.blit(self.score_text, (x2, y2))
-            screen.blit(self.multiplier_text, (x2, y2 + 45))
+            screen.blit(self.multiplier_text, (x2, y2 + 40))
 
