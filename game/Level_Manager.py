@@ -20,7 +20,7 @@ class Level_Manager:
         # A list of level objects
         self.levels = []
         self.level = 1
-        self.TOTAL_LEVELS = 2
+        self.TOTAL_LEVELS = 3
 
         # Level 1 gets instantiated initially
         L1 = Level(self.generate_level_1_column_data(), self.screen, self.level_1_ball_data(),
