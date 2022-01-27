@@ -14,6 +14,7 @@ class UserInterface:
 
         self.titlefont = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 100)
         self.titlefont2 = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 75)
+        self.titlefont3 = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 50)
         self.regularfont = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 20)
         self.largefont = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 25)
 
@@ -29,7 +30,8 @@ class UserInterface:
 
         # Start Screen UI
         self.show_start_screen = True
-        self.start_text = self.titlefont.render(f'Press Space', True, self.TITLE)
+        self.start_text = self.titlefont3.render(f'Press Space to Play', True, self.TITLE)
+        self.start_text2 = self.titlefont3.render(f'Use R and U for controls', True, self.TITLE)
 
         # End Screen UI
         self.show_end_screen = False
@@ -75,7 +77,9 @@ class UserInterface:
 
         # Start screen
         if self.show_start_screen:
-            screen.blit(self.start_text, (SCREEN_WIDTH / 2 - self.start_text.get_width() / 2, SCREEN_HEIGHT / 2 - 50))
+            screen.blit(self.start_text2, (SCREEN_WIDTH / 2 - self.start_text2.get_width() / 2, SCREEN_HEIGHT / 2 + 50))
+            screen.blit(self.start_text, (SCREEN_WIDTH / 2 - self.start_text.get_width() / 2, SCREEN_HEIGHT / 2 + 100))
+
 
         # Score
         if self.show_score:
