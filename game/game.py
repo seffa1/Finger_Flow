@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT
 from .Level_Manager import Level_Manager
 from .UserInterface import UserInterface
 from .Projectile_Manager import Projectile_Manager
@@ -11,9 +12,8 @@ from .Music_Manager import Music_Manager
 
 class Game:
     def __init__(self, screen, clock):
-        self.start_screen = False
         self.playing = False
-        self.game_over = False
+        self.end_screen = False
 
         self.screen = screen
         self.clock = clock
@@ -27,55 +27,90 @@ class Game:
         self.music_manager.load_music('background')
         self.level_manager = Level_Manager(screen, self.projectile_manager, self.particle_manager, self.music_manager)
 
+    def start_screen(self):
+        """ Pause the game until user presses space"""
+        background = pg.image.load('assets/images/background_1.jpg').convert_alpha()
+        while True:
+            self.screen.fill((0, 0, 0))
+            # Draw the background
+            self.screen.blit(background, (0, 0))
+            # Draw the start screen
+            self.user_interface.draw(self.screen)
+            pg.display.flip()
+            # Wait for user to press play
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+                    return
+
     def run(self):
         self.playing = True
-        if self.start_screen:
-            # Show the start screen
-            # Explain the controls
-            # Space to start the game
-            # Set self.start_screen to false
-            pass
+
+        # Run the start screen loop until player presses space
+        self.start_screen()
+
+        # Then disabled showing the start screen
+        self.user_interface.show_start_screen = False
+
+        # Enable the score screen
+        self.user_interface.show_score = True
 
         # Game loop
         while self.playing:
-            if self.game_over:
-                # Show game over screen which includes their score
-                # They must press spacebar to continue
-
-                # Reset all game parameters and go back to level 1
-                self.user_interface = UserInterface()
-                self.projectile_manager = Projectile_Manager()
-                self.particle_manager = Particle_Manager(self.screen)
-                self.level_manager = Level_Manager(self.screen, self.projectile_manager, self.particle_manager,
-                                                   self.music_manager)
-                self.game_over = False
-
             self.clock.tick(60)
-            self.events()
+            self.events(self.screen, self.clock)
             self.update()
             self.draw()
 
-    def events(self):
+    def events(self, screen, clock):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
 
+            if event.type == self.level_manager.game_complete:
+                # Eventually well queue a game over screen with our score #TODO
+                # For the remaining projectiles...
+                for projectile in self.level_manager.get_level().projectile_group.sprites():
+                    # stop them from moving to the kill point, so the level never ends
+                    projectile.vel.x = -.1
+                    if projectile.pos.x < 0 - projectile.WIDTH:
+                        projectile.pos.x = 0 - projectile.WIDTH
+
+                self.user_interface.show_score = False
+                self.user_interface.show_end_screen = True
+                self.end_screen = True
+
+            if event.type == pg.KEYDOWN and event.key == pg.K_SPACE and self.end_screen:
+                self.playing = False
+                self.end_screen = False
+
+                self.screen = screen
+                self.clock = clock
+                self.width, self.height = self.screen.get_size()
+
+                self.user_interface = UserInterface()
+                self.projectile_manager = Projectile_Manager()
+                self.particle_manager = Particle_Manager(screen)
+
+                self.music_manager = Music_Manager()
+                self.music_manager.load_music('background')
+                self.level_manager = Level_Manager(screen, self.projectile_manager, self.particle_manager,
+                                                   self.music_manager)
+
+
             if event.type == pg.USEREVENT + 3:
                 self.user_interface.add_point(self.level_manager.get_level().ball_group)
 
             if event.type == self.level_manager.level_ended:
-                print("LEVEL COMPLETE")
                 self.level_manager.next_level()
 
-            if event.type == self.level_manager.game_complete:
-                # Eventually well queue a game over screen with our score #TODO
-                print("GAME COMPLETED!")
-                # For the remaining projectiles...
-                for projectile in self.level_manager.get_level().projectile_group.sprites():
-                    # stop them from moving, so the level never ends
-                    projectile.vel.x = 0
-                    self.game_over = True
+
 
 
             if event.type == pg.KEYDOWN:

@@ -40,17 +40,18 @@ class Projectile(pg.sprite.Sprite):
             pg.event.post(self.get_point_event)
 
 
-    def draw(self, screen, show_hitboxes=True):
+    def draw(self, screen, show_hitboxes=False):
         if show_hitboxes:
             if self.collided:
                 pg.draw.rect(screen, (0, 255, 0), self.rect)
             else:
                 pg.draw.rect(screen, (255, 0, 255), self.rect)
         # Draws the image differently based on if its a top wall or bottom wall
-        # If its a low wal
+        # If its a low wall, their positions match
         if self.pos.y > 0:
             screen.blit(self.IMAGE_SCALED, (self.pos.x, self.pos.y))
+        # If its a high wall
+
         else:
-            # If its a high wall
-            screen.blit(self.IMAGE_SCALED, (self.pos.x, self.pos.y - self.HEIGHT - 8))
+            screen.blit(self.IMAGE_SCALED, (self.pos.x, self.rect.height - self.IMAGE.get_height()))
 
