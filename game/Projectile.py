@@ -40,7 +40,7 @@ class Projectile(pg.sprite.Sprite):
             pg.event.post(self.get_point_event)
 
 
-    def draw(self, screen, show_hitboxes=True):
+    def draw(self, screen, show_hitboxes=False):
         if show_hitboxes:
             if self.collided:
                 pg.draw.rect(screen, (0, 255, 0), self.rect)

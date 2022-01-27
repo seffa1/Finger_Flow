@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT
 from .Level_Manager import Level_Manager
 from .UserInterface import UserInterface
 from .Projectile_Manager import Projectile_Manager
@@ -26,8 +27,45 @@ class Game:
         self.music_manager.load_music('background')
         self.level_manager = Level_Manager(screen, self.projectile_manager, self.particle_manager, self.music_manager)
 
+    def start_screen(self):
+        """ Pause the game until user presses space"""
+        background = pg.image.load('assets/images/background_1.jpg').convert_alpha()
+        titlefont = pg.font.SysFont('assets/images/aztec_font1.tff', 70)
+        start_string = f'Press Enter to Continue'
+        start_text = titlefont.render(start_string, True, (0, 255, 0))
+
+        while True:
+            self.screen.fill((0, 0, 0))
+            # Draw the background
+            self.screen.blit(background, (0, 0))
+            # Draw the start screen
+            # self.screen.blit(start_text, (SCREEN_WIDTH / 2 - 400, SCREEN_HEIGHT / 2 - 20))
+
+
+            self.user_interface.draw(self.screen)
+            pg.display.flip()
+            # Wait for user to press play
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+                    return
+
     def run(self):
         self.playing = True
+
+        # Run the start screen loop until player presses space
+        self.start_screen()
+
+        # Then disabled showing the start screen
+        self.user_interface.show_start_screen = False
+
+        # Enable the score screen
+        self.user_interface.show_score = True
 
         # Game loop
         while self.playing:
@@ -57,8 +95,6 @@ class Game:
                     projectile.vel.x = -.1
                     if projectile.pos.x < 0 - projectile.WIDTH:
                         projectile.pos.x = 0 - projectile.WIDTH
-
-
 
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:

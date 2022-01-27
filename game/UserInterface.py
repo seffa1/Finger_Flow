@@ -10,18 +10,27 @@ class UserInterface:
         self.BLUE = (0, 0, 255)
         self.BLACK = (0, 0, 0)
         self.WHITE = (255, 255, 255)
+        self.TITLE = (212, 255, 233)
 
-        self.smallfont = pg.font.SysFont("Verdana", 10)
+        self.titlefont = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 100)
         self.regularfont = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 20)
         self.largefont = pg.font.Font('assets/fonts/PixeloidMono-1G8ae.ttf', 25)
 
+        # Dev tools UI
         self.FPS_text = self.regularfont.render("0", True, self.GREEN)
 
+        # Score UI
+        self.show_score = False
         self.score = 0
         self.score_text = self.regularfont.render('0', True, self.BLACK)
-
         self.multiplier = 2
         self.multiplier_text = self.largefont.render('02', True, self.BLACK)
+
+        # Start Screen UI
+        self.show_start_screen = True
+        self.start_text = self.titlefont.render(f'Press Space', True, self.TITLE)
+
+        # End Screen UI
 
     def add_point(self, ball_group):
         for ball in ball_group.sprites():
@@ -60,6 +69,13 @@ class UserInterface:
         # UI for troubleshooting
         if UI:
             screen.blit(self.FPS_text, (x1, y1))
+
+        if self.show_start_screen:
+            screen.blit(self.start_text, (SCREEN_WIDTH / 2 - self.start_text.get_width() / 2, SCREEN_HEIGHT / 2 - 50))
+
+        if self.show_score:
             screen.blit(self.score_text, (x2, y2))
             screen.blit(self.multiplier_text, (x2, y2 + 40))
+
+
 
