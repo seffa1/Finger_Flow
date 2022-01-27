@@ -30,18 +30,11 @@ class Game:
     def start_screen(self):
         """ Pause the game until user presses space"""
         background = pg.image.load('assets/images/background_1.jpg').convert_alpha()
-        titlefont = pg.font.SysFont('assets/images/aztec_font1.tff', 70)
-        start_string = f'Press Enter to Continue'
-        start_text = titlefont.render(start_string, True, (0, 255, 0))
-
         while True:
             self.screen.fill((0, 0, 0))
             # Draw the background
             self.screen.blit(background, (0, 0))
             # Draw the start screen
-            # self.screen.blit(start_text, (SCREEN_WIDTH / 2 - 400, SCREEN_HEIGHT / 2 - 20))
-
-
             self.user_interface.draw(self.screen)
             pg.display.flip()
             # Wait for user to press play
@@ -70,22 +63,15 @@ class Game:
         # Game loop
         while self.playing:
             self.clock.tick(60)
-            self.events()
+            self.events(self.screen, self.clock)
             self.update()
             self.draw()
 
-    def events(self):
+    def events(self, screen, clock):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
-
-            if event.type == pg.USEREVENT + 3:
-                self.user_interface.add_point(self.level_manager.get_level().ball_group)
-
-            if event.type == self.level_manager.level_ended:
-                print("LEVEL COMPLETE")
-                self.level_manager.next_level()
 
             if event.type == self.level_manager.game_complete:
                 # Eventually well queue a game over screen with our score #TODO
@@ -95,6 +81,37 @@ class Game:
                     projectile.vel.x = -.1
                     if projectile.pos.x < 0 - projectile.WIDTH:
                         projectile.pos.x = 0 - projectile.WIDTH
+
+                self.user_interface.show_score = False
+                self.user_interface.show_end_screen = True
+                self.end_screen = True
+
+            if event.type == pg.KEYDOWN and event.key == pg.K_SPACE and self.end_screen:
+                self.playing = False
+                self.end_screen = False
+
+                self.screen = screen
+                self.clock = clock
+                self.width, self.height = self.screen.get_size()
+
+                self.user_interface = UserInterface()
+                self.projectile_manager = Projectile_Manager()
+                self.particle_manager = Particle_Manager(screen)
+
+                self.music_manager = Music_Manager()
+                self.music_manager.load_music('background')
+                self.level_manager = Level_Manager(screen, self.projectile_manager, self.particle_manager,
+                                                   self.music_manager)
+
+
+            if event.type == pg.USEREVENT + 3:
+                self.user_interface.add_point(self.level_manager.get_level().ball_group)
+
+            if event.type == self.level_manager.level_ended:
+                self.level_manager.next_level()
+
+
+
 
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:

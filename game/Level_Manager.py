@@ -28,6 +28,9 @@ class Level_Manager:
         L1.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
         self.levels.append(L1)
 
+    def clear_levels(self):
+        self.levels = []
+        self.level = 1
 
     def check_level_state(self):
         # If all the levels projectile are gone (made it to the left side of the screen)
