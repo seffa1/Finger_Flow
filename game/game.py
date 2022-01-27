@@ -87,7 +87,7 @@ class Game:
                 self.end_screen = True
 
             if event.type == pg.KEYDOWN and event.key == pg.K_SPACE and self.end_screen:
-                self.playing = False
+                # self.playing = False
                 self.end_screen = False
 
                 self.screen = screen
@@ -102,6 +102,11 @@ class Game:
                 self.music_manager.load_music('background')
                 self.level_manager = Level_Manager(screen, self.projectile_manager, self.particle_manager,
                                                    self.music_manager)
+
+                self.user_interface.show_score = True
+                self.user_interface.show_start_screen = False
+
+
 
 
             if event.type == pg.USEREVENT + 3:
