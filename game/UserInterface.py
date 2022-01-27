@@ -58,7 +58,7 @@ class UserInterface:
         multiplier_string = f'Multiplier: {str(self.multiplier)}'
         self.multiplier_text = self.largefont.render(multiplier_string, True, self.BLACK)
 
-    def draw(self, screen, laptop=False):
+    def draw(self, screen, laptop=True):
         # Text at the top right
         x1 = SCREEN_WIDTH - 200
         # Text at the top left
@@ -80,7 +80,6 @@ class UserInterface:
             screen.blit(self.start_text2, (SCREEN_WIDTH / 2 - self.start_text2.get_width() / 2, SCREEN_HEIGHT / 2 + 50))
             screen.blit(self.start_text, (SCREEN_WIDTH / 2 - self.start_text.get_width() / 2, SCREEN_HEIGHT / 2 + 100))
 
-
         # Score
         if self.show_score:
             screen.blit(self.score_text, (x2, y1))
@@ -88,6 +87,7 @@ class UserInterface:
 
         # End Screen
         if self.show_end_screen:
+            self.end_text2 = self.titlefont.render(f'Score {self.score}', True, self.TITLE)
             screen.blit(self.end_text1, (SCREEN_WIDTH / 2 - self.end_text1.get_width() / 2, SCREEN_HEIGHT / 2 + 50))
             screen.blit(self.end_text2, (SCREEN_WIDTH / 2 - self.end_text2.get_width() / 2, SCREEN_HEIGHT / 2 - 50))
 
