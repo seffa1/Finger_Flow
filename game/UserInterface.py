@@ -58,7 +58,7 @@ class UserInterface:
         multiplier_string = f'Multiplier: {str(self.multiplier)}'
         self.multiplier_text = self.largefont.render(multiplier_string, True, self.BLACK)
 
-    def draw(self, screen, laptop=True):
+    def draw(self, screen, laptop=False):
         # Text at the top right
         x1 = SCREEN_WIDTH - 200
         # Text at the top left
