@@ -20,11 +20,11 @@ class Projectile_Manager:
     def level_1_data(self):
         level_data = []
         speed_ = LEVEL_SPEEDS[1]
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=700, speed=speed_))
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1400, height=400, speed=speed_))
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1800, height=700, speed=speed_))
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 2200, height=400, speed=speed_))
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 2600, height=700, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 500, height=700, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 900, height=400, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1300, height=700, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1700, height=400, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 2100, height=700, speed=speed_))
         return level_data
 
     def level_2_data(self):
