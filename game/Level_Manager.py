@@ -20,7 +20,7 @@ class Level_Manager:
         # A list of level objects
         self.levels = []
         self.level = 1
-        self.TOTAL_LEVELS = 3
+        self.TOTAL_LEVELS = 4
 
         # Level 1 gets instantiated initially
         L1 = Level(self.generate_level_1_column_data(), self.screen, self.level_1_ball_data(),
@@ -78,6 +78,15 @@ class Level_Manager:
                        self.projectile_manager.get_level_data(3), self.particle_manager, self.music_manager, self)
             L3.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
             self.levels.append(L3)
+            self.level += 1
+            return
+
+        elif self.level == 3:
+            # Level 4 Instantiation
+            L4 = Level(self.generate_level_1_column_data(), self.screen, self.extract_ball_data(),
+                       self.projectile_manager.get_level_data(4), self.particle_manager, self.music_manager, self)
+            L4.add_background(pg.image.load('assets/images/background_1.jpg').convert_alpha())
+            self.levels.append(L4)
             self.level += 1
             return
 

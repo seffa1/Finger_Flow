@@ -10,7 +10,8 @@ class Projectile_Manager:
         self.level_data = {
             1: self.level_1_data(),
             2: self.level_2_data(),
-            3: self.level_3_data()
+            3: self.level_3_data(),
+            4: self.level_4_data()
         }
 
     def get_level_data(self, n: int):
@@ -67,21 +68,41 @@ class Projectile_Manager:
     def level_4_data(self):
         level_data = []
         speed_ = LEVEL_SPEEDS[2]
+        low_height1 = 250
+        low_height2 = 350
+        low_height3 = 500
+        low_height4 = 650
+        high_height1 = 600
+        high_height2 = 450
+        high_height3 = 300
+        high_height4 = 150
         # Low walls
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=700, speed=speed_))
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1800, height=200, speed=speed_))
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 2600, height=700, speed=speed_))
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 3400, height=200, speed=speed_))
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 4200, height=700, speed=speed_))
-        level_data.append(self.low_wall(x=SCREEN_WIDTH + 5000, height=200, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1000, height=low_height1, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 1800, height=low_height4, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 2600, height=low_height1, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 3400, height=low_height2, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 4200, height=low_height1, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 5000, height=low_height3, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 5800, height=low_height1, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 6600, height=low_height4, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 7400, height=low_height3, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 8200, height=low_height2, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 9000, height=low_height1, speed=speed_))
+        level_data.append(self.low_wall(x=SCREEN_WIDTH + 9800, height=low_height4, speed=speed_))
 
         # High walls
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1000, height=150, speed=speed_))
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1800, height=450, speed=speed_))
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 2600, height=150, speed=speed_))
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 3400, height=450, speed=speed_))
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 4200, height=150, speed=speed_))
-        level_data.append(self.high_wall(x=SCREEN_WIDTH + 5000, height=450, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1000, height=high_height1, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 1800, height=high_height4, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 2600, height=high_height1, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 3400, height=high_height2, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 4200, height=high_height1, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 5000, height=high_height3, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 5800, height=high_height1, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 6600, height=high_height4, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 7400, height=high_height3, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 8200, height=high_height2, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 9000, height=high_height1, speed=speed_))
+        level_data.append(self.high_wall(x=SCREEN_WIDTH + 9800, height=high_height4, speed=speed_))
         return level_data
 
     # Low wall
